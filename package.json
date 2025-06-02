@@ -1,0 +1,40 @@
+{
+    "name": "gyrovector",
+    "version": "1.0.0",
+    "scripts": {
+        "lint": "prettier --write . && eslint src --fix",
+        "start": "rimraf dist && tsc"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Antony74/gyrovector.git"
+    },
+    "keywords": [
+        "gyrovector",
+        "vector",
+        "hyperbolic",
+        "non-euclidean",
+        "geometry",
+        "p5"
+    ],
+    "author": "Antony74",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Antony74/gyrovector/issues"
+    },
+    "homepage": "https://github.com/Antony74/gyrovector#readme",
+    "description": "Gyrovector classes for hyperbolic, Euclidean, and spherical geometries",
+    "devDependencies": {
+        "@eslint/js": "^9.27.0",
+        "eslint": "^9.27.0",
+        "eslint-plugin-no-mixed-operators": "^1.1.1",
+        "prettier": "^3.5.3",
+        "rimraf": "^6.0.1",
+        "typescript": "^5.8.3",
+        "typescript-eslint": "^8.32.1"
+    },
+    "prettier": {
+        "tabWidth": 4,
+        "singleQuote": true
+    }
+}
