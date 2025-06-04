@@ -1,7 +1,7 @@
 import { NumberTuple } from './tuples';
 
 export interface BaseGyrovector<Dimension extends number, Gyrovector> {
-    asArray(): NumberTuple<Dimension>;
+    array(): NumberTuple<Dimension>;
     add(v: Gyrovector): Gyrovector;
     sub(v: Gyrovector): Gyrovector;
     mult(c: number): Gyrovector;

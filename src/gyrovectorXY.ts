@@ -13,7 +13,7 @@ export class GyrovectorXY implements BaseGyrovector<2, GyrovectorXY> {
         this.space = new GyrovectorXYSpace(curvature);
     }
 
-    asArray(): [number, number] {
+    array(): [number, number] {
         return [this.x, this.y];
     }
 
@@ -86,11 +86,11 @@ export class GyrovectorXYSpace implements GyrovectorSpace<2, GyrovectorXY> {
         if (c === 0 || (u.x === 0 && u.y === 0)) {
             return this.createVector(0, 0);
         }
-        const lenu = _u.mag();
-        const normu = this.vectorXYFactory.mult(1 / lenu, _u);
+        const magnitude = _u.mag();
+        const normalized = this.vectorXYFactory.mult(1 / magnitude, _u);
         const result = this.vectorXYFactory.mult(
-            this.tan(c * this.atan(lenu)),
-            normu,
+            this.tan(c * this.atan(magnitude)),
+            normalized,
         );
         return this.createVector(result.x, result.y);
     }

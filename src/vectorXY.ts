@@ -36,7 +36,7 @@ export class VectorXY implements BaseGyrovector<2, VectorXY> {
         return this.factory.rotate(this, radians);
     }
 
-    asArray(): [number, number] {
+    array(): [number, number] {
         return [this.x, this.y];
     }
 }
