@@ -1,5 +1,5 @@
-import { BaseVectorSpace } from "./baseVectorSpace";
-import { VectorXY } from "./vectorXY";
+import { BaseVectorSpace } from './baseVectorSpace';
+import { VectorXY } from './vectorXY';
 
 export class VectorXYSpace implements BaseVectorSpace<2, VectorXY> {
     createVector(x: number, y: number): VectorXY {

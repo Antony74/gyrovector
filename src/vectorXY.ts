@@ -45,4 +45,3 @@ export class VectorXY implements BaseVector<2, VectorXY> {
         return (this.x * v.x) + (this.y * v.y);
     }
 }
-

@@ -3,12 +3,12 @@ import { NumberTuple } from './tuples';
 
 export interface BaseVectorSpace<
     Dimension extends number,
-    Gyrovector extends BaseVector<Dimension, Gyrovector>,
+    Vector extends BaseVector<Dimension, Vector>,
 > {
-    createVector: (...vec: NumberTuple<Dimension>) => Gyrovector;
-    add: (u: Gyrovector, v: Gyrovector) => Gyrovector;
-    sub: (u: Gyrovector, v: Gyrovector) => Gyrovector;
-    mult: (c: number, u: Gyrovector) => Gyrovector;
-    div: (c: number, u: Gyrovector) => Gyrovector;
-    rotate: (u: Gyrovector, radians: number) => Gyrovector;
+    createVector: (...vec: NumberTuple<Dimension>) => Vector;
+    add: (u: Vector, v: Vector) => Vector;
+    sub: (u: Vector, v: Vector) => Vector;
+    mult: (c: number, u: Vector) => Vector;
+    div: (c: number, u: Vector) => Vector;
+    rotate: (u: Vector, radians: number) => Vector;
 }

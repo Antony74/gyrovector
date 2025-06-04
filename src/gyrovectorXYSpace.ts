@@ -1,6 +1,10 @@
-import { BaseVectorSpace } from "./baseVectorSpace";
-import { Curvature, createCurvature } from "./curvatureDependentTrigonometricFunctions";
-import { GyrovectorXY } from "./gyrovectorXY";
+import { BaseVectorSpace } from './baseVectorSpace';
+import { GyrovectorXY } from './gyrovectorXY';
+
+import {
+    Curvature,
+    createCurvature,
+} from './curvatureDependentTrigonometricFunctions';
 
 export class GyrovectorXYSpace implements BaseVectorSpace<2, GyrovectorXY> {
     curvature: Curvature;
