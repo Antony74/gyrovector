@@ -1,4 +1,4 @@
-export const tan = (curvature: number) => (x: number) => {
+const tan = (curvature: number) => (x: number) => {
     if (curvature < 0) {
         return (
             (1 / Math.sqrt(-curvature)) * Math.tanh(Math.sqrt(-curvature) * x)
@@ -10,7 +10,7 @@ export const tan = (curvature: number) => (x: number) => {
     }
 };
 
-export const atan = (curvature: number) => (x: number) => {
+const atan = (curvature: number) => (x: number) => {
     if (curvature < 0) {
         return (
             (1 / Math.sqrt(-curvature)) * Math.atanh(Math.sqrt(-curvature) * x)
@@ -20,4 +20,14 @@ export const atan = (curvature: number) => (x: number) => {
     } else {
         return (1 / Math.sqrt(curvature)) * Math.atan(Math.sqrt(curvature) * x);
     }
+};
+
+export type Curvature = {
+    value: number;
+    tan: (x: number) => number;
+    atan: (x: number) => number;
+};
+
+export const createCurvature = (curvature: number): Readonly<Curvature> => {
+    return { value: curvature, tan: tan(curvature), atan: atan(curvature) };
 };

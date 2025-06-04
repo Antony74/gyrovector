@@ -1,51 +1,73 @@
-import { BaseGyrovector, GyrovectorSpace } from './baseGyrovector';
-import { VectorXYFactory } from './vectorXY';
-import * as trig from './curvatureDependentTrigonometricFunctions';
+import { BaseVector, GyrovectorSpace } from './baseGyrovector';
+import { VectorXY } from './vectorXY';
+import {
+    createCurvature,
+    Curvature,
+} from './curvatureDependentTrigonometricFunctions';
 
-export class GyrovectorXY implements BaseGyrovector<2, GyrovectorXY> {
-    space: GyrovectorXYSpace;
-
+export class GyrovectorXY implements BaseVector<2, GyrovectorXY> {
     constructor(
         public readonly x: number,
         public readonly y: number,
-        public readonly curvature: number,
-    ) {
-        this.space = new GyrovectorXYSpace(curvature);
-    }
+        public readonly curvature: Curvature,
+    ) {}
 
     array(): [number, number] {
         return [this.x, this.y];
     }
 
-    add(u: GyrovectorXY) {
-        return this.space.add(this, u);
+    add(v: GyrovectorXY): GyrovectorXY {
+        const _u = new VectorXY(this.x, this.y);
+        const _v = new VectorXY(v.x, v.y);
+        const lhs = _u.mult(
+            1 - (2 * this.curvature.value * _u.dot(_v)) + _v.dot(_v),
+        );
+        const rhs = _v.mult(1 + (this.curvature.value * _u.dot(_u)));
+        const top = lhs.add(rhs);
+
+        const bottom =
+            1 -
+            (2 * this.curvature.value * _u.dot(_v)) +
+            (this.curvature.value *
+                this.curvature.value *
+                _u.dot(_u) *
+                _v.dot(_v));
+
+        const result = top.mult(1 / bottom);
+        return new GyrovectorXY(result.x, result.y, this.curvature);
     }
 
-    sub(u: GyrovectorXY) {
-        return this.space.sub(this, u);
+    sub(v: GyrovectorXY) {
+        return this.add(new GyrovectorXY(-v.x, -v.y, this.curvature));
     }
 
     mult(c: number): GyrovectorXY {
-        return this.space.mult(c, this);
+        const u = new VectorXY(this.x, this.y);
+        if (c === 0 || (u.x === 0 && u.y === 0)) {
+            return new GyrovectorXY(0, 0, this.curvature);
+        }
+        const magnitude = u.mag();
+        const normalized = u.mult(1 / magnitude);
+        const result = normalized.mult(
+            this.curvature.tan(c * this.curvature.atan(magnitude)),
+        );
+        return new GyrovectorXY(result.x, result.y, this.curvature);
     }
-
     div(c: number): GyrovectorXY {
-        return this.space.div(c, this);
+        return this.mult(1 / c);
     }
 
     rotate(radians: number): GyrovectorXY {
-        return this.space.rotate(this, radians);
+        const result = new VectorXY(this.x, this.y).rotate(radians);
+        return new GyrovectorXY(result.x, result.y, this.curvature);
     }
 }
 
 export class GyrovectorXYSpace implements GyrovectorSpace<2, GyrovectorXY> {
-    vectorXYFactory = new VectorXYFactory();
-    tan;
-    atan;
+    curvature: Curvature;
 
-    constructor(public readonly curvature: number) {
-        this.tan = trig.tan(curvature);
-        this.atan = trig.atan(curvature);
+    constructor(curvature: number) {
+        this.curvature = createCurvature(curvature);
     }
 
     createVector(x: number, y: number): GyrovectorXY {
@@ -53,56 +75,22 @@ export class GyrovectorXYSpace implements GyrovectorSpace<2, GyrovectorXY> {
     }
 
     add(u: GyrovectorXY, v: GyrovectorXY): GyrovectorXY {
-        const _u = this.vectorXYFactory.createVector(u.x, u.y);
-        const _v = this.vectorXYFactory.createVector(v.x, v.y);
-        const lhs = this.vectorXYFactory.mult(
-            1 -
-                (2 * this.curvature * this.vectorXYFactory.dot(_u, _v)) +
-                this.vectorXYFactory.dot(_v, _v),
-            _u,
-        );
-        const rhs = this.vectorXYFactory.mult(
-            1 + (this.curvature * this.vectorXYFactory.dot(_u, _u)),
-            _v,
-        );
-        const top = this.vectorXYFactory.add(lhs, rhs);
-        const bottom =
-            1 -
-            (2 * this.curvature * this.vectorXYFactory.dot(_u, _v)) +
-            (this.curvature *
-                this.curvature *
-                this.vectorXYFactory.dot(_u, _u) *
-                this.vectorXYFactory.dot(_v, _v));
-        const result = this.vectorXYFactory.mult(1 / bottom, top);
-        return this.createVector(result.x, result.y);
+        return u.add(v);
     }
 
     sub(u: GyrovectorXY, v: GyrovectorXY): GyrovectorXY {
-        return this.add(u, this.createVector(-v.x, -v.y));
+        return u.sub(v);
     }
 
     mult(c: number, u: GyrovectorXY): GyrovectorXY {
-        const _u = this.vectorXYFactory.createVector(u.x, u.y);
-        if (c === 0 || (u.x === 0 && u.y === 0)) {
-            return this.createVector(0, 0);
-        }
-        const magnitude = _u.mag();
-        const normalized = this.vectorXYFactory.mult(1 / magnitude, _u);
-        const result = this.vectorXYFactory.mult(
-            this.tan(c * this.atan(magnitude)),
-            normalized,
-        );
-        return this.createVector(result.x, result.y);
+        return u.mult(c);
     }
 
     div(c: number, u: GyrovectorXY): GyrovectorXY {
-        return this.mult(1 / c, u);
+        return u.mult(1 / c);
     }
 
     rotate(u: GyrovectorXY, radians: number): GyrovectorXY {
-        const result = this.vectorXYFactory
-            .createVector(u.x, u.y)
-            .rotate(radians);
-        return this.createVector(result.x, result.y);
+        return u.rotate(radians);
     }
 }

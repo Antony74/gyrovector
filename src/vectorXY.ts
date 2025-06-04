@@ -1,15 +1,13 @@
-import { BaseGyrovector, GyrovectorSpace } from './baseGyrovector';
+import { BaseVector, GyrovectorSpace } from './baseGyrovector';
 
-export class VectorXY implements BaseGyrovector<2, VectorXY> {
-    factory = new VectorXYFactory();
-
+export class VectorXY implements BaseVector<2, VectorXY> {
     constructor(
-        public readonly x: number,
-        public readonly y: number,
+        public x: number,
+        public y: number,
     ) {}
 
     magSq() {
-        return this.factory.dot(this, this);
+        return this.dot(this);
     }
 
     mag() {
@@ -17,27 +15,34 @@ export class VectorXY implements BaseGyrovector<2, VectorXY> {
     }
 
     add(v: VectorXY): VectorXY {
-        return this.factory.add(this, v);
+        return new VectorXY(this.x + v.x, this.y + v.y);
     }
 
     sub(v: VectorXY): VectorXY {
-        return this.factory.sub(this, v);
+        return new VectorXY(this.x - v.x, this.y - v.y);
     }
 
     mult(c: number): VectorXY {
-        return this.factory.mult(c, this);
+        return new VectorXY(c * this.x, c * this.y);
     }
 
     div(c: number): VectorXY {
-        return this.factory.div(c, this);
+        return new VectorXY(this.x / c, this.y / c);
     }
 
     rotate(radians: number): VectorXY {
-        return this.factory.rotate(this, radians);
+        return new VectorXY(
+            (this.x * Math.cos(radians)) - (this.y * Math.sin(radians)),
+            (this.x * Math.sin(radians)) + (this.y * Math.cos(radians)),
+        );
     }
 
     array(): [number, number] {
         return [this.x, this.y];
+    }
+
+    dot(v: VectorXY): number {
+        return (this.x * v.x) + (this.y * v.y);
     }
 }
 
@@ -46,30 +51,27 @@ export class VectorXYFactory implements GyrovectorSpace<2, VectorXY> {
         return new VectorXY(x, y);
     }
 
-    dot(u: VectorXY, v: VectorXY): number {
-        return (u.x * v.x) + (u.y * v.y);
-    }
-
     add(u: VectorXY, v: VectorXY): VectorXY {
-        return this.createVector(u.x + v.x, u.y + v.y);
+        return u.add(v);
     }
 
     sub(u: VectorXY, v: VectorXY): VectorXY {
-        return this.createVector(u.x - v.x, u.y - v.y);
+        return u.sub(v);
     }
 
     mult(c: number, u: VectorXY): VectorXY {
-        return this.createVector(c * u.x, c * u.y);
+        return u.mult(c);
     }
 
     div(c: number, u: VectorXY): VectorXY {
-        return this.createVector(u.x / c, u.y / c);
+        return u.div(c);
     }
 
     rotate(u: VectorXY, radians: number): VectorXY {
-        return this.createVector(
-            (u.x * Math.cos(radians)) - (u.y * Math.sin(radians)),
-            (u.x * Math.sin(radians)) + (u.y * Math.cos(radians)),
-        );
+        return u.rotate(radians);
+    }
+
+    dot(u: VectorXY, v: VectorXY): number {
+        return u.dot(v);
     }
 }
