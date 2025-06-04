@@ -1,9 +1,6 @@
-import { BaseVector, GyrovectorSpace } from './baseGyrovector';
+import { BaseVector } from './baseVector';
 import { VectorXY } from './vectorXY';
-import {
-    createCurvature,
-    Curvature,
-} from './curvatureDependentTrigonometricFunctions';
+import { Curvature } from './curvatureDependentTrigonometricFunctions';
 
 export class GyrovectorXY implements BaseVector<2, GyrovectorXY> {
     constructor(
@@ -60,37 +57,5 @@ export class GyrovectorXY implements BaseVector<2, GyrovectorXY> {
     rotate(radians: number): GyrovectorXY {
         const result = new VectorXY(this.x, this.y).rotate(radians);
         return new GyrovectorXY(result.x, result.y, this.curvature);
-    }
-}
-
-export class GyrovectorXYSpace implements GyrovectorSpace<2, GyrovectorXY> {
-    curvature: Curvature;
-
-    constructor(curvature: number) {
-        this.curvature = createCurvature(curvature);
-    }
-
-    createVector(x: number, y: number): GyrovectorXY {
-        return new GyrovectorXY(x, y, this.curvature);
-    }
-
-    add(u: GyrovectorXY, v: GyrovectorXY): GyrovectorXY {
-        return u.add(v);
-    }
-
-    sub(u: GyrovectorXY, v: GyrovectorXY): GyrovectorXY {
-        return u.sub(v);
-    }
-
-    mult(c: number, u: GyrovectorXY): GyrovectorXY {
-        return u.mult(c);
-    }
-
-    div(c: number, u: GyrovectorXY): GyrovectorXY {
-        return u.mult(1 / c);
-    }
-
-    rotate(u: GyrovectorXY, radians: number): GyrovectorXY {
-        return u.rotate(radians);
     }
 }
