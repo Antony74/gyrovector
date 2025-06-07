@@ -67,4 +67,18 @@ export class Vector<Dimension extends number>
             }).tuple,
         );
     }
+
+    dot(v: Vector<Dimension>): number {
+        return this.tuple.reduce((acc, value, index) => {
+            return acc + (value * v.tuple.tuple[index]);
+        }, 0);
+    }
+
+    magSq() {
+        return this.dot(this);
+    }
+
+    mag() {
+        return this.magSq();
+    }
 }

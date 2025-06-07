@@ -2,7 +2,7 @@ import { VectorSpaceLike } from './vectorSpaceLike';
 import { VectorXY } from './vectorXY';
 
 export class VectorXYSpace implements VectorSpaceLike<2, VectorXY> {
-    createVector(x: number, y: number): VectorXY {
+    createVector([x, y]: [number, number]): VectorXY {
         return new VectorXY(x, y);
     }
 
@@ -24,9 +24,5 @@ export class VectorXYSpace implements VectorSpaceLike<2, VectorXY> {
 
     rotate(u: VectorXY, radians: number): VectorXY {
         return u.rotate(radians);
-    }
-
-    dot(u: VectorXY, v: VectorXY): number {
-        return u.dot(v);
     }
 }

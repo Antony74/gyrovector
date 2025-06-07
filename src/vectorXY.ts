@@ -6,14 +6,6 @@ export class VectorXY implements VectorLike<2, VectorXY> {
         public y: number,
     ) {}
 
-    magSq() {
-        return this.dot(this);
-    }
-
-    mag() {
-        return this.magSq();
-    }
-
     add(v: VectorXY): VectorXY {
         return new VectorXY(this.x + v.x, this.y + v.y);
     }
@@ -43,5 +35,13 @@ export class VectorXY implements VectorLike<2, VectorXY> {
 
     dot(v: VectorXY): number {
         return (this.x * v.x) + (this.y * v.y);
+    }
+
+    magSq() {
+        return this.dot(this);
+    }
+
+    mag() {
+        return this.magSq();
     }
 }

@@ -13,7 +13,7 @@ export class GyrovectorXYSpace implements VectorSpaceLike<2, GyrovectorXY> {
         this.curvature = createCurvature(curvature);
     }
 
-    createVector(x: number, y: number): GyrovectorXY {
+    createVector([x, y]: [number, number]): GyrovectorXY {
         return new GyrovectorXY(x, y, this.curvature);
     }
 

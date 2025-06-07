@@ -5,10 +5,16 @@ export interface VectorSpaceLike<
     Dimension extends number,
     Vector extends VectorLike<Dimension, Vector>,
 > {
-    createVector: (...vec: NumberTuplePrimitive<Dimension>) => Vector;
+    createVector: (tuplePrimitive: NumberTuplePrimitive<Dimension>) => Vector;
     add: (u: Vector, v: Vector) => Vector;
     sub: (u: Vector, v: Vector) => Vector;
     mult: (c: number, u: Vector) => Vector;
     div: (c: number, u: Vector) => Vector;
-    rotate: (u: Vector, radians: number) => Vector;
+
+    rotate: (
+        u: Vector,
+        radians: number,
+        firstAxis?: number,
+        secondAxis?: number,
+    ) => Vector;
 }
