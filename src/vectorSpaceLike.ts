@@ -1,11 +1,11 @@
 import { VectorLike } from './vectorLike';
-import { NumberTuple } from './tuples';
+import { NumberTuplePrimitive } from './tuples';
 
 export interface VectorSpaceLike<
     Dimension extends number,
     Vector extends VectorLike<Dimension, Vector>,
 > {
-    createVector: (...vec: NumberTuple<Dimension>) => Vector;
+    createVector: (...vec: NumberTuplePrimitive<Dimension>) => Vector;
     add: (u: Vector, v: Vector) => Vector;
     sub: (u: Vector, v: Vector) => Vector;
     mult: (c: number, u: Vector) => Vector;
