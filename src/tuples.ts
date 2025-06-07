@@ -1,38 +1,58 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-type _TupleOf<T, N extends number, R extends T[]> = R['length'] extends N
-    ? R
-    : _TupleOf<T, N, [T, ...R]>;
+type _TupleOf<
+    T,
+    Dimension extends number,
+    R extends T[],
+> = R['length'] extends Dimension ? R : _TupleOf<T, Dimension, [T, ...R]>;
 
-export type TuplePrimitive<T, N extends number> = _TupleOf<T, N, []> & {
-    length: N;
+export type TuplePrimitive<T, Dimension extends number> = _TupleOf<
+    T,
+    Dimension,
+    []
+> & {
+    length: Dimension;
     [Symbol.iterator](): ArrayIterator<T>;
+    map<U>(
+        callbackfn: (value: T, index: number, array: T[]) => U,
+        thisArg?: any,
+    ): U[];
+    filter(
+        predicate: (value: T, index: number, array: T[]) => unknown,
+        thisArg?: any,
+    ): T[];
+    reduce<U>(
+        callbackfn: (
+            previousValue: U,
+            currentValue: T,
+            currentIndex: number,
+            array: T[],
+        ) => U,
+        initialValue: U,
+    ): U;
+    [n: number]: T;
 };
 
-export class Tuple<T, N extends number> {
-    tuple: TuplePrimitive<T, N>;
+export class Tuple<T, Dimension extends number> {
+    constructor(public tuple: TuplePrimitive<T, Dimension>) {}
 
-    constructor(...tuplePrimitive: TuplePrimitive<T, N>) {
-        this.tuple = tuplePrimitive;
-    }
-
-    get length(): number {
+    get length(): Dimension {
         return this.tuple.length;
     }
 
-    static isTuplePrimitive<T, N extends number>(
+    static isTuplePrimitive<T, Dimension extends number>(
         n: number,
         maybeTuple: { length: number },
-    ): maybeTuple is TuplePrimitive<T, N> {
+    ): maybeTuple is TuplePrimitive<T, Dimension> {
         return Array.isArray(maybeTuple) && maybeTuple.length === n;
     }
 
-    static from<T, N extends number>(
+    static from<T, Dimension extends number>(
         n: number,
         maybeTuple: { length: number },
-    ): Tuple<T, N> {
+    ): Tuple<T, Dimension> {
         const arr = Array.from<T>(maybeTuple);
-        if (Tuple.isTuplePrimitive<T, N>(n, arr)) {
-            return new Tuple<T, N>(...(arr as any));
+        if (Tuple.isTuplePrimitive<T, Dimension>(n, arr)) {
+            return new Tuple<T, Dimension>(arr);
         } else {
             throw new Error(
                 `Tuple.from: Array of length ${n} required to create a ${n}-tuple`,
@@ -55,7 +75,40 @@ export class Tuple<T, N extends number> {
         return this;
     }
 
-    //    map<U>(callbackfn: (value: T, index: number, array: T[]) => U, thisArg?: any): U[];
+    map<U>(
+        callbackfn: (value: T, index: number, array: T[]) => U,
+        thisArg?: any,
+    ): Tuple<U, Dimension> {
+        const result = this.tuple.map(callbackfn, thisArg);
+        return new Tuple<U, Dimension>(result as any);
+    }
+
+    filter(
+        predicate: (value: T, index: number, array: T[]) => unknown,
+        thisArg?: any,
+    ): T[] {
+        return this.tuple.filter(predicate, thisArg);
+    }
+
+    reduce<U>(
+        callbackfn: (
+            previousValue: U,
+            currentValue: T,
+            currentIndex: number,
+            array: T[],
+        ) => U,
+        initialValue: U,
+    ): U {
+        return this.tuple.reduce(callbackfn, initialValue);
+    }
 }
 
-export type NumberTuplePrimitive<N extends number> = TuplePrimitive<number, N>;
+export type NumberTuplePrimitive<Dimension extends number> = TuplePrimitive<
+    number,
+    Dimension
+>;
+
+export class NumberTuple<Dimension extends number> extends Tuple<
+    number,
+    Dimension
+> {}
