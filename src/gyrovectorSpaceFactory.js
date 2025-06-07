@@ -1,5 +1,5 @@
-import { VectorXYSpace } from './vectorXYSpace';
-import { GyrovectorXYSpace } from './gyrovectorXYSpace';
+import { createVectorXYSpace } from './vectorXY';
+import { createGyrovectorXYSpace } from './gyrovectorXY';
 
 export class GyrovectorSpaceFactory {
     static create(dimension, curvature) {
@@ -10,9 +10,9 @@ export class GyrovectorSpaceFactory {
         }
 
         if (curvature === 0) {
-            return new VectorXYSpace();
+            return createVectorXYSpace();
         } else {
-            return new GyrovectorXYSpace(curvature);
+            return createGyrovectorXYSpace(curvature);
         }
     }
 }

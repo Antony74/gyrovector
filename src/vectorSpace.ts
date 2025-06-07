@@ -1,33 +1,49 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NumberTuplePrimitive } from './tuples';
-import { Vector } from './vector';
+import { VectorLike } from './vectorLike';
 import { VectorSpaceLike } from './vectorSpaceLike';
 
-export class VectorSpace<Dimension extends number>
-    implements VectorSpaceLike<Dimension, Vector<Dimension>>
+export class VectorSpace<
+    Dimension extends number,
+    Vector extends VectorLike<Dimension, Vector>,
+> implements VectorSpaceLike<Dimension, Vector>
 {
-    createVector(
-        tuplePrimitive: NumberTuplePrimitive<Dimension>,
-    ): Vector<Dimension> {
-        return new Vector(tuplePrimitive);
+    constructorParams;
+
+    constructor(
+        private VectorConstructor: new (
+            tuplePrimitive: NumberTuplePrimitive<Dimension>,
+            ...constructorParams: any
+        ) => Vector,
+        ...constructorParams: any
+    ) {
+        this.constructorParams = constructorParams;
     }
 
-    add(u: Vector<Dimension>, v: Vector<Dimension>): Vector<Dimension> {
+    createVector(tuplePrimitive: NumberTuplePrimitive<Dimension>): Vector {
+        return new this.VectorConstructor(
+            tuplePrimitive,
+            ...this.constructorParams,
+        );
+    }
+
+    add(u: Vector, v: Vector): Vector {
         return u.add(v);
     }
 
-    sub(u: Vector<Dimension>, v: Vector<Dimension>): Vector<Dimension> {
+    sub(u: Vector, v: Vector): Vector {
         return u.sub(v);
     }
 
-    mult(c: number, u: Vector<Dimension>): Vector<Dimension> {
+    mult(c: number, u: Vector): Vector {
         return u.mult(c);
     }
 
-    div(c: number, u: Vector<Dimension>): Vector<Dimension> {
+    div(c: number, u: Vector): Vector {
         return u.div(c);
     }
 
-    rotate(u: Vector<Dimension>, radians: number): Vector<Dimension> {
+    rotate(u: Vector, radians: number): Vector {
         return u.rotate(radians);
     }
 }
