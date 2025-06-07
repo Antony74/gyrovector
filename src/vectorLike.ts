@@ -1,6 +1,6 @@
 import { NumberTuple } from './tuples';
 
-export interface BaseVector<Dimension extends number, Vector> {
+export interface VectorLike<Dimension extends number, Vector> {
     array(): NumberTuple<Dimension>;
     add(v: Vector): Vector;
     sub(v: Vector): Vector;

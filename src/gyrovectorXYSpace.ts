@@ -1,4 +1,4 @@
-import { BaseVectorSpace } from './baseVectorSpace';
+import { VectorSpaceLike } from './vectorSpaceLike';
 import { GyrovectorXY } from './gyrovectorXY';
 
 import {
@@ -6,7 +6,7 @@ import {
     createCurvature,
 } from './curvatureDependentTrigonometricFunctions';
 
-export class GyrovectorXYSpace implements BaseVectorSpace<2, GyrovectorXY> {
+export class GyrovectorXYSpace implements VectorSpaceLike<2, GyrovectorXY> {
     curvature: Curvature;
 
     constructor(curvature: number) {

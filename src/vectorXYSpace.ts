@@ -1,7 +1,7 @@
-import { BaseVectorSpace } from './baseVectorSpace';
+import { VectorSpaceLike } from './vectorSpaceLike';
 import { VectorXY } from './vectorXY';
 
-export class VectorXYSpace implements BaseVectorSpace<2, VectorXY> {
+export class VectorXYSpace implements VectorSpaceLike<2, VectorXY> {
     createVector(x: number, y: number): VectorXY {
         return new VectorXY(x, y);
     }

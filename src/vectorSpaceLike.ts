@@ -1,9 +1,9 @@
-import { BaseVector } from './baseVector';
+import { VectorLike } from './vectorLike';
 import { NumberTuple } from './tuples';
 
-export interface BaseVectorSpace<
+export interface VectorSpaceLike<
     Dimension extends number,
-    Vector extends BaseVector<Dimension, Vector>,
+    Vector extends VectorLike<Dimension, Vector>,
 > {
     createVector: (...vec: NumberTuple<Dimension>) => Vector;
     add: (u: Vector, v: Vector) => Vector;

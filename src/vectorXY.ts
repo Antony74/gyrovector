@@ -1,6 +1,6 @@
-import { BaseVector } from './baseVector';
+import { VectorLike } from './vectorLike';
 
-export class VectorXY implements BaseVector<2, VectorXY> {
+export class VectorXY implements VectorLike<2, VectorXY> {
     constructor(
         public x: number,
         public y: number,

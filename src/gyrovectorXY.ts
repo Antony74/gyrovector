@@ -1,8 +1,8 @@
-import { BaseVector } from './baseVector';
+import { VectorLike } from './vectorLike';
 import { VectorXY } from './vectorXY';
 import { Curvature } from './curvatureDependentTrigonometricFunctions';
 
-export class GyrovectorXY implements BaseVector<2, GyrovectorXY> {
+export class GyrovectorXY implements VectorLike<2, GyrovectorXY> {
     constructor(
         public readonly x: number,
         public readonly y: number,
