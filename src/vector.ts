@@ -2,37 +2,36 @@ import { NumberTuple, NumberTuplePrimitive } from './tuples';
 import { VectorLike } from './vectorLike';
 
 export class Vector<Dimension extends number>
+    extends NumberTuple<Dimension>
     implements VectorLike<Dimension, Vector<Dimension>>
 {
-    public tuple: NumberTuple<Dimension>;
-
     constructor(tuple: NumberTuplePrimitive<Dimension>) {
-        this.tuple = new NumberTuple<Dimension>(tuple);
+        super(tuple);
     }
 
     array() {
-        return this.tuple.tuple;
+        return this.tuple;
     }
 
     add(v: Vector<Dimension>): Vector<Dimension> {
         return new Vector<Dimension>(
-            this.tuple.map<number>((value, index) => {
-                return value + v.tuple.tuple[index];
+            this.map((value, index) => {
+                return value + v.tuple[index];
             }).tuple,
         );
     }
 
     sub(v: Vector<Dimension>): Vector<Dimension> {
         return new Vector<Dimension>(
-            this.tuple.map<number>((value, index) => {
-                return value - v.tuple.tuple[index];
+            this.map((value, index) => {
+                return value - v.tuple[index];
             }).tuple,
         );
     }
 
     mult(c: number): Vector<Dimension> {
         return new Vector<Dimension>(
-            this.tuple.map((value) => {
+            this.map((value) => {
                 return c * value;
             }).tuple,
         );
@@ -41,7 +40,7 @@ export class Vector<Dimension extends number>
     div(c: number): Vector<Dimension> {
         const reciprocal = 1 / c;
         return new Vector<Dimension>(
-            this.tuple.map((value) => {
+            this.map((value) => {
                 return reciprocal * value;
             }).tuple,
         );
@@ -52,11 +51,11 @@ export class Vector<Dimension extends number>
         firstAxis: number = 0,
         secondAxis: number = 1,
     ): Vector<Dimension> {
-        const x = this.tuple.tuple[firstAxis];
-        const y = this.tuple.tuple[secondAxis];
+        const x = this.tuple[firstAxis];
+        const y = this.tuple[secondAxis];
 
         return new Vector<Dimension>(
-            this.tuple.map((value, index) => {
+            this.map((value, index) => {
                 if (index === firstAxis) {
                     return (x * Math.cos(radians)) - (y * Math.sin(radians));
                 } else if (index === secondAxis) {
@@ -70,7 +69,7 @@ export class Vector<Dimension extends number>
 
     dot(v: Vector<Dimension>): number {
         return this.tuple.reduce((acc, value, index) => {
-            return acc + (value * v.tuple.tuple[index]);
+            return acc + (value * v.tuple[index]);
         }, 0);
     }
 
