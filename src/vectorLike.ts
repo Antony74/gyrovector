@@ -1,7 +1,5 @@
-import { NumberTuplePrimitive } from './tuples';
-
-export interface VectorLike<Dimension extends number, Vector> {
-    array(): NumberTuplePrimitive<Dimension>;
+export interface VectorLike<Vector> {
+    array(): ReadonlyArray<number>;
     add(v: Vector): Vector;
     sub(v: Vector): Vector;
     mult(c: number): Vector;

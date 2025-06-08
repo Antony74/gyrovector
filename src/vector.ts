@@ -3,13 +3,13 @@ import { VectorLike } from './vectorLike';
 
 export class Vector<Dimension extends number>
     extends NumberTuple<Dimension>
-    implements VectorLike<Dimension, Vector<Dimension>>
+    implements VectorLike<Vector<Dimension>>
 {
     constructor(tuple: NumberTuplePrimitive<Dimension>) {
         super(tuple);
     }
 
-    array() {
+    array(): ReadonlyArray<number> {
         return this.tuple;
     }
 

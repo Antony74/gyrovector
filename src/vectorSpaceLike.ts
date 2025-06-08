@@ -3,7 +3,7 @@ import { NumberTuplePrimitive } from './tuples';
 
 export interface VectorSpaceLike<
     Dimension extends number,
-    Vector extends VectorLike<Dimension, Vector>,
+    Vector extends VectorLike<Vector>,
 > {
     createVector: (tuplePrimitive: NumberTuplePrimitive<Dimension>) => Vector;
     add: (u: Vector, v: Vector) => Vector;

@@ -6,7 +6,7 @@ import {
 } from './curvatureDependentTrigonometricFunctions';
 import { VectorSpace } from './vectorSpace';
 
-export class GyrovectorXY implements VectorLike<2, GyrovectorXY> {
+export class GyrovectorXY implements VectorLike<GyrovectorXY> {
     x;
     y;
 

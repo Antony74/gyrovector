@@ -5,7 +5,7 @@ import { VectorSpaceLike } from './vectorSpaceLike';
 
 export class VectorSpace<
     Dimension extends number,
-    Vector extends VectorLike<Dimension, Vector>,
+    Vector extends VectorLike<Vector>,
 > implements VectorSpaceLike<Dimension, Vector>
 {
     constructorParams;

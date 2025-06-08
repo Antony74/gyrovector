@@ -1,7 +1,7 @@
 import { VectorLike } from './vectorLike';
 import { VectorSpace } from './vectorSpace';
 
-export class VectorXY implements VectorLike<2, VectorXY> {
+export class VectorXY implements VectorLike<VectorXY> {
     x;
     y;
 
@@ -33,7 +33,7 @@ export class VectorXY implements VectorLike<2, VectorXY> {
         ]);
     }
 
-    array(): [number, number] {
+    array(): Readonly<[number, number]> {
         return [this.x, this.y];
     }
 
