@@ -18,7 +18,7 @@ export class GyrovectorXY implements VectorLike<GyrovectorXY> {
         this.y = y;
     }
 
-    array(): [number, number] {
+    array(): Readonly<[number, number]> {
         return [this.x, this.y];
     }
 
