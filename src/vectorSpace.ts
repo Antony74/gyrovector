@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NumberTuplePrimitive } from './tuples';
 import { VectorLike } from './vectorLike';
 import { VectorSpaceLike } from './vectorSpaceLike';
@@ -6,24 +5,26 @@ import { VectorSpaceLike } from './vectorSpaceLike';
 export class VectorSpace<
     Dimension extends number,
     Vector extends VectorLike<Vector>,
+    AdditionalVectorConstructorParams extends Array<unknown> = [],
 > implements VectorSpaceLike<Dimension, Vector>
 {
-    constructorParams;
+    additionalVectorConstructorParams;
 
     constructor(
         private VectorConstructor: new (
             tuplePrimitive: NumberTuplePrimitive<Dimension>,
-            ...constructorParams: any
+            ...additionalVectorConstructorParams: AdditionalVectorConstructorParams
         ) => Vector,
-        ...constructorParams: any
+        ...additionalVectorConstructorParams: AdditionalVectorConstructorParams
     ) {
-        this.constructorParams = constructorParams;
+        this.additionalVectorConstructorParams =
+            additionalVectorConstructorParams;
     }
 
     createVector(tuplePrimitive: NumberTuplePrimitive<Dimension>): Vector {
         return new this.VectorConstructor(
             tuplePrimitive,
-            ...this.constructorParams,
+            ...this.additionalVectorConstructorParams,
         );
     }
 

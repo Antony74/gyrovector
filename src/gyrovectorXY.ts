@@ -70,5 +70,8 @@ export class GyrovectorXY implements VectorLike<GyrovectorXY> {
 }
 
 export const createGyrovectorXYSpace = (curvature: number) => {
-    return new VectorSpace(GyrovectorXY, createCurvature(curvature));
+    return new VectorSpace<2, GyrovectorXY, [Curvature]>(
+        GyrovectorXY,
+        createCurvature(curvature),
+    );
 };
