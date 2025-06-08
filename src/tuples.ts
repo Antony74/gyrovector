@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 type _TupleOf<
     T,
     Dimension extends number,
@@ -14,11 +13,11 @@ export type TuplePrimitive<T, Dimension extends number> = _TupleOf<
     [Symbol.iterator](): ArrayIterator<T>;
     map<U>(
         callbackfn: (value: T, index: number, array: T[]) => U,
-        thisArg?: any,
+        thisArg?: Readonly<ArrayLike<T>>,
     ): U[];
     filter(
         predicate: (value: T, index: number, array: T[]) => unknown,
-        thisArg?: any,
+        thisArg?: Readonly<ArrayLike<T>>,
     ): T[];
     reduce<U>(
         callbackfn: (
@@ -78,15 +77,15 @@ export class Tuple<T, Dimension extends number> {
 
     map<U>(
         callbackfn: (value: T, index: number, array: T[]) => U,
-        thisArg?: any,
+        thisArg?: Readonly<ArrayLike<T>>,
     ): Tuple<U, Dimension> {
         const result = this.tuple.map(callbackfn, thisArg);
-        return new Tuple<U, Dimension>(result as any);
+        return new Tuple<U, Dimension>(result as TuplePrimitive<U, Dimension>);
     }
 
     filter(
         predicate: (value: T, index: number, array: T[]) => unknown,
-        thisArg?: any,
+        thisArg?: Readonly<ArrayLike<T>>,
     ): T[] {
         return this.tuple.filter(predicate, thisArg);
     }
