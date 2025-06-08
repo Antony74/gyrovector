@@ -60,20 +60,21 @@ export class Tuple<T, Dimension extends number> {
         }
     }
 
-    fill(value: T, start: number = 0, end: number = this.tuple.length): this {
-        if (start < 0) {
-            start += this.tuple.length;
-        }
+    // Comment mutable fill method
+    // fill(value: T, start: number = 0, end: number = this.tuple.length): this {
+    //     if (start < 0) {
+    //         start += this.tuple.length;
+    //     }
 
-        if (end < 0) {
-            end += this.tuple.length;
-        }
+    //     if (end < 0) {
+    //         end += this.tuple.length;
+    //     }
 
-        for (let n = start; n < end; ++n) {
-            (this.tuple as Array<T>)[n] = value;
-        }
-        return this;
-    }
+    //     for (let n = start; n < end; ++n) {
+    //         (this.tuple as Array<T>)[n] = value;
+    //     }
+    //     return this;
+    // }
 
     map<U>(
         callbackfn: (value: T, index: number, array: T[]) => U,
