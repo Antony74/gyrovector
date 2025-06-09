@@ -1,4 +1,4 @@
-import { VectorLike } from './vectorLike';
+import { VectorLike, VectorLikeConstructor } from './vectorLike';
 import { VectorSpace } from './vectorSpace';
 
 export class VectorXY implements VectorLike<VectorXY> {
@@ -51,5 +51,8 @@ export class VectorXY implements VectorLike<VectorXY> {
 }
 
 export const createVectorXYSpace = () => {
-    return new VectorSpace(VectorXY);
+    type Dimension = 2;
+    type Constructor = VectorLikeConstructor<Dimension, VectorXY, []>;
+
+    return new VectorSpace<Dimension, VectorXY, Constructor>(VectorXY);
 };

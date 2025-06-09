@@ -1,4 +1,4 @@
-import { VectorLike } from './vectorLike';
+import { VectorLike, VectorLikeConstructor } from './vectorLike';
 import { VectorXY } from './vectorXY';
 import {
     createCurvature,
@@ -70,8 +70,18 @@ export class GyrovectorXY implements VectorLike<GyrovectorXY> {
 }
 
 export const createGyrovectorXYSpace = (curvature: number) => {
-    return new VectorSpace<2, GyrovectorXY, [Curvature]>(
+    type Dimension = 2;
+    type AdditionalConstructorParams = [Curvature];
+    type Constructor = VectorLikeConstructor<
+        Dimension,
         GyrovectorXY,
-        createCurvature(curvature),
-    );
+        AdditionalConstructorParams
+    >;
+
+    return new VectorSpace<
+        Dimension,
+        GyrovectorXY,
+        Constructor,
+        AdditionalConstructorParams
+    >(GyrovectorXY, createCurvature(curvature));
 };

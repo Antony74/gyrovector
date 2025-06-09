@@ -1,20 +1,22 @@
 import { NumberTuplePrimitive } from './tuples';
-import { VectorLike } from './vectorLike';
+import { VectorLike, VectorLikeConstructor } from './vectorLike';
 import { VectorSpaceLike } from './vectorSpaceLike';
 
 export class VectorSpace<
     Dimension extends number,
     Vector extends VectorLike<Vector>,
+    VectorConstructorType extends VectorLikeConstructor<
+        Dimension,
+        Vector,
+        AdditionalVectorConstructorParams
+    >,
     AdditionalVectorConstructorParams extends Array<unknown> = [],
 > implements VectorSpaceLike<Dimension, Vector>
 {
     additionalVectorConstructorParams;
 
     constructor(
-        private VectorConstructor: new (
-            tuplePrimitive: NumberTuplePrimitive<Dimension>,
-            ...additionalVectorConstructorParams: AdditionalVectorConstructorParams
-        ) => Vector,
+        private VectorConstructor: VectorConstructorType,
         ...additionalVectorConstructorParams: AdditionalVectorConstructorParams
     ) {
         this.additionalVectorConstructorParams =
