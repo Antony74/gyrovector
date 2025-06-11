@@ -73,11 +73,11 @@ export class Vector<Dimension extends number>
         }, 0);
     }
 
-    magSq() {
+    magSq(): number {
         return this.dot(this);
     }
 
-    mag() {
+    mag(): number {
         return Math.sqrt(this.magSq());
     }
 }

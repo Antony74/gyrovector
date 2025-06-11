@@ -67,6 +67,18 @@ export class GyrovectorXY implements VectorLike<GyrovectorXY> {
         const result = new VectorXY([this.x, this.y]).rotate(radians);
         return new GyrovectorXY([result.x, result.y], this.curvature);
     }
+
+    dot(v: VectorXY): number {
+        return (this.x * v.x) + (this.y * v.y);
+    }
+
+    magSq(): number {
+        return this.dot(this);
+    }
+
+    mag(): number {
+        return Math.sqrt(this.magSq());
+    }
 }
 
 export const createGyrovectorXYSpace = (curvature: number) => {

@@ -7,6 +7,9 @@ export interface VectorLike<Vector> {
     mult(c: number): Vector;
     div(c: number): Vector;
     rotate(radians: number, firstAxis?: number, secondAxis?: number): Vector;
+    dot(v: Vector): number;
+    magSq(): number;
+    mag(): number;
 }
 
 export type VectorLikeConstructor<
