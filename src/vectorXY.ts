@@ -46,7 +46,7 @@ export class VectorXY implements VectorLike<VectorXY> {
     }
 
     mag() {
-        return this.magSq();
+        return Math.sqrt(this.magSq());
     }
 }
 

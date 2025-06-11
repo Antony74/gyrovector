@@ -78,6 +78,6 @@ export class Vector<Dimension extends number>
     }
 
     mag() {
-        return this.magSq();
+        return Math.sqrt(this.magSq());
     }
 }
