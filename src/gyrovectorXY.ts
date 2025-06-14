@@ -1,10 +1,11 @@
-import { VectorLike, VectorLikeConstructor } from './vectorLike';
+import { VectorLike } from './vectorLike';
 import { VectorXY } from './vectorXY';
 import {
     createCurvature,
     Curvature,
 } from './curvatureDependentTrigonometricFunctions';
-import { VectorSpace } from './vectorSpace';
+import { VectorSpaceBase } from './vectorSpaceBase';
+import { VectorSpaceLike } from './vectorSpaceLike';
 
 export class GyrovectorXY implements VectorLike<GyrovectorXY> {
     x;
@@ -81,19 +82,22 @@ export class GyrovectorXY implements VectorLike<GyrovectorXY> {
     }
 }
 
-export const createGyrovectorXYSpace = (curvature: number) => {
-    type Dimension = 2;
-    type AdditionalConstructorParams = [Curvature];
-    type Constructor = VectorLikeConstructor<
-        Dimension,
-        GyrovectorXY,
-        AdditionalConstructorParams
-    >;
+export class GyrovectorXYSpace
+    extends VectorSpaceBase<2, GyrovectorXY>
+    implements Pick<VectorSpaceLike<2, GyrovectorXY>, 'createVector'>
+{
+    curvature;
 
-    return new VectorSpace<
-        Dimension,
-        GyrovectorXY,
-        Constructor,
-        AdditionalConstructorParams
-    >(GyrovectorXY, createCurvature(curvature));
+    constructor(curvature: number) {
+        super();
+        this.curvature = createCurvature(curvature);
+    }
+
+    createVector([x, y]: [number, number]) {
+        return new GyrovectorXY([x, y], this.curvature);
+    }
+}
+
+export const createGyrovectorXYSpace = (curvature: number) => {
+    return new GyrovectorXYSpace(curvature);
 };

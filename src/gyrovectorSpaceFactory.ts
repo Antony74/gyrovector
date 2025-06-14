@@ -1,18 +1,10 @@
-import { createVectorXYSpace, VectorXY } from './vectorXY';
-import { createGyrovectorXYSpace, GyrovectorXY } from './gyrovectorXY';
-import { VectorSpace } from './vectorSpace';
-import { VectorLikeConstructor } from './vectorLike';
+import { createVectorXYSpace, VectorSpaceXY } from './vectorXY';
+import { createGyrovectorXYSpace, GyrovectorXYSpace } from './gyrovectorXY';
 
 export class GyrovectorSpaceFactory {
-    static create(
-        dimension: 2,
-        curvature: 0,
-    ): VectorSpace<2, VectorXY, VectorLikeConstructor<2, VectorXY>>;
+    static create(dimension: 2, curvature: 0): VectorSpaceXY;
 
-    static create(
-        dimension: 2,
-        curvature: number,
-    ): VectorSpace<2, GyrovectorXY, VectorLikeConstructor<2, GyrovectorXY>>;
+    static create(dimension: 2, curvature: number): GyrovectorXYSpace;
 
     static create(dimension: number, curvature: number) {
         if (dimension !== 2) {

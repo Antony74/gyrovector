@@ -1,5 +1,6 @@
-import { VectorLike, VectorLikeConstructor } from './vectorLike';
-import { VectorSpace } from './vectorSpace';
+import { VectorLike } from './vectorLike';
+import { VectorSpaceBase } from './vectorSpaceBase';
+import { VectorSpaceLike } from './vectorSpaceLike';
 
 export class VectorXY implements VectorLike<VectorXY> {
     x;
@@ -50,9 +51,15 @@ export class VectorXY implements VectorLike<VectorXY> {
     }
 }
 
-export const createVectorXYSpace = () => {
-    type Dimension = 2;
-    type Constructor = VectorLikeConstructor<Dimension, VectorXY, []>;
+export class VectorSpaceXY
+    extends VectorSpaceBase<2, VectorXY>
+    implements Pick<VectorSpaceLike<2, VectorXY>, 'createVector'>
+{
+    createVector([x, y]: [number, number]) {
+        return new VectorXY([x, y]);
+    }
+}
 
-    return new VectorSpace<Dimension, VectorXY, Constructor>(VectorXY);
+export const createVectorXYSpace = () => {
+    return new VectorSpaceXY();
 };
