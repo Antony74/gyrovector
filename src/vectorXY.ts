@@ -1,6 +1,6 @@
 import { VectorLike } from './vectorLike';
 import { VectorSpaceBase } from './vectorSpaceBase';
-import { VectorSpaceLike } from './vectorSpaceLike';
+import { WithCreateVector } from './vectorSpaceLike';
 
 export class VectorXY implements VectorLike<VectorXY> {
     x;
@@ -52,8 +52,8 @@ export class VectorXY implements VectorLike<VectorXY> {
 }
 
 export class VectorSpaceXY
-    extends VectorSpaceBase<2, VectorXY>
-    implements Pick<VectorSpaceLike<2, VectorXY>, 'createVector'>
+    extends VectorSpaceBase<VectorXY>
+    implements WithCreateVector<2, VectorXY>
 {
     createVector([x, y]: [number, number]) {
         return new VectorXY([x, y]);

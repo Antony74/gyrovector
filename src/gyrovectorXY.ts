@@ -5,7 +5,7 @@ import {
     Curvature,
 } from './curvatureDependentTrigonometricFunctions';
 import { VectorSpaceBase } from './vectorSpaceBase';
-import { VectorSpaceLike } from './vectorSpaceLike';
+import { WithCreateVector } from './vectorSpaceLike';
 
 export class GyrovectorXY implements VectorLike<GyrovectorXY> {
     x;
@@ -83,8 +83,8 @@ export class GyrovectorXY implements VectorLike<GyrovectorXY> {
 }
 
 export class GyrovectorXYSpace
-    extends VectorSpaceBase<2, GyrovectorXY>
-    implements Pick<VectorSpaceLike<2, GyrovectorXY>, 'createVector'>
+    extends VectorSpaceBase<GyrovectorXY>
+    implements WithCreateVector<2, GyrovectorXY>
 {
     curvature;
 
