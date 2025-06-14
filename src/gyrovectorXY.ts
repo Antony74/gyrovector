@@ -8,8 +8,8 @@ import { VectorSpaceBase } from './vectorSpaceBase';
 import { WithCreateVector } from './vectorSpaceLike';
 
 export class GyrovectorXY implements VectorLike<GyrovectorXY> {
-    x;
-    y;
+    readonly x: number;
+    readonly y: number;
 
     constructor(
         x: number,
