@@ -2,7 +2,7 @@ import { VectorLike } from './vectorLike';
 import { VectorSpaceBase } from './vectorSpaceBase';
 import { WithCreateVector } from './vectorSpaceLike';
 
-export class VectorXY implements VectorLike<VectorXY> {
+export class VectorXY implements VectorLike<2, VectorXY> {
     readonly x: number;
     readonly y: number;
 
@@ -52,7 +52,7 @@ export class VectorXY implements VectorLike<VectorXY> {
 }
 
 export class VectorSpaceXY
-    extends VectorSpaceBase<VectorXY>
+    extends VectorSpaceBase<2, VectorXY>
     implements WithCreateVector<2, VectorXY>
 {
     createVector(x: number, y: number) {

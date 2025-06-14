@@ -1,8 +1,10 @@
 import { VectorLike } from './vectorLike';
 import { VectorSpaceLike } from './vectorSpaceLike';
 
-export class VectorSpaceBase<Vector extends VectorLike<Vector>>
-    implements VectorSpaceLike<Vector>
+export class VectorSpaceBase<
+    Dimension extends number,
+    Vector extends VectorLike<Dimension, Vector>,
+> implements VectorSpaceLike<Dimension, Vector>
 {
     constructor() {}
 

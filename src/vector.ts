@@ -2,36 +2,41 @@ import { NumberTuple, NumberTuplePrimitive } from './tuples';
 import { VectorLike } from './vectorLike';
 
 export class Vector<Dimension extends number>
-    extends NumberTuple<Dimension>
-    implements VectorLike<Vector<Dimension>>
+    implements VectorLike<Dimension, Vector<Dimension>>
 {
+    private _tuple: NumberTuple<Dimension>;
+
     constructor(...tuple: NumberTuplePrimitive<Dimension>) {
-        super(tuple);
+        this._tuple = new NumberTuple(tuple);
     }
 
-    array(): ReadonlyArray<number> {
-        return this.tuple;
+    get tuple(): Readonly<NumberTuple<Dimension>> {
+        return this._tuple;
+    }
+
+    array(): Readonly<NumberTuplePrimitive<Dimension>> {
+        return this._tuple.tuple;
     }
 
     add(v: Vector<Dimension>): Vector<Dimension> {
         return new Vector<Dimension>(
-            ...this.map((value, index) => {
-                return value + v.at(index);
+            ...this._tuple.map((value, index) => {
+                return value + v.tuple.at(index);
             }).tuple,
         );
     }
 
     sub(v: Vector<Dimension>): Vector<Dimension> {
         return new Vector<Dimension>(
-            ...this.map((value, index) => {
-                return value - v.at(index);
+            ...this._tuple.map((value, index) => {
+                return value - v._tuple.at(index);
             }).tuple,
         );
     }
 
     mult(c: number): Vector<Dimension> {
         return new Vector<Dimension>(
-            ...this.map((value) => {
+            ...this._tuple.map((value) => {
                 return c * value;
             }).tuple,
         );
@@ -40,7 +45,7 @@ export class Vector<Dimension extends number>
     div(c: number): Vector<Dimension> {
         const reciprocal = 1 / c;
         return new Vector<Dimension>(
-            ...this.map((value) => {
+            ...this._tuple.map((value) => {
                 return reciprocal * value;
             }).tuple,
         );
@@ -51,11 +56,11 @@ export class Vector<Dimension extends number>
         firstAxis: number = 0,
         secondAxis: number = 1,
     ): Vector<Dimension> {
-        const x = this.at(firstAxis);
-        const y = this.at(secondAxis);
+        const x = this._tuple.at(firstAxis);
+        const y = this._tuple.at(secondAxis);
 
         return new Vector<Dimension>(
-            ...this.map((value, index) => {
+            ...this._tuple.map((value, index) => {
                 if (index === firstAxis) {
                     return (x * Math.cos(radians)) - (y * Math.sin(radians));
                 } else if (index === secondAxis) {
@@ -68,8 +73,8 @@ export class Vector<Dimension extends number>
     }
 
     dot(v: Vector<Dimension>): number {
-        return this.reduce((acc, value, index) => {
-            return acc + (value * v.at(index));
+        return this._tuple.reduce((acc, value, index) => {
+            return acc + (value * v._tuple.at(index));
         }, 0);
     }
 

@@ -7,7 +7,7 @@ import {
 import { VectorSpaceBase } from './vectorSpaceBase';
 import { WithCreateVector } from './vectorSpaceLike';
 
-export class GyrovectorXY implements VectorLike<GyrovectorXY> {
+export class GyrovectorXY implements VectorLike<2, GyrovectorXY> {
     readonly x: number;
     readonly y: number;
 
@@ -84,7 +84,7 @@ export class GyrovectorXY implements VectorLike<GyrovectorXY> {
 }
 
 export class GyrovectorXYSpace
-    extends VectorSpaceBase<GyrovectorXY>
+    extends VectorSpaceBase<2, GyrovectorXY>
     implements WithCreateVector<2, GyrovectorXY>
 {
     curvature;
