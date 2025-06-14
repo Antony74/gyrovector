@@ -12,7 +12,8 @@ export class GyrovectorXY implements VectorLike<GyrovectorXY> {
     y;
 
     constructor(
-        [x, y]: [number, number],
+        x: number,
+        y: number,
         public readonly curvature: Curvature,
     ) {
         this.x = x;
@@ -24,8 +25,8 @@ export class GyrovectorXY implements VectorLike<GyrovectorXY> {
     }
 
     add(v: GyrovectorXY): GyrovectorXY {
-        const _u = new VectorXY([this.x, this.y]);
-        const _v = new VectorXY([v.x, v.y]);
+        const _u = new VectorXY(this.x, this.y);
+        const _v = new VectorXY(v.x, v.y);
         const lhs = _u.mult(
             1 - (2 * this.curvature.value * _u.dot(_v)) + _v.dot(_v),
         );
@@ -41,32 +42,32 @@ export class GyrovectorXY implements VectorLike<GyrovectorXY> {
                 _v.dot(_v));
 
         const result = top.mult(1 / bottom);
-        return new GyrovectorXY([result.x, result.y], this.curvature);
+        return new GyrovectorXY(result.x, result.y, this.curvature);
     }
 
     sub(v: GyrovectorXY) {
-        return this.add(new GyrovectorXY([-v.x, -v.y], this.curvature));
+        return this.add(new GyrovectorXY(-v.x, -v.y, this.curvature));
     }
 
     mult(c: number): GyrovectorXY {
-        const u = new VectorXY([this.x, this.y]);
+        const u = new VectorXY(this.x, this.y);
         if (c === 0 || (u.x === 0 && u.y === 0)) {
-            return new GyrovectorXY([0, 0], this.curvature);
+            return new GyrovectorXY(0, 0, this.curvature);
         }
         const magnitude = u.mag();
         const normalized = u.mult(1 / magnitude);
         const result = normalized.mult(
             this.curvature.tan(c * this.curvature.atan(magnitude)),
         );
-        return new GyrovectorXY([result.x, result.y], this.curvature);
+        return new GyrovectorXY(result.x, result.y, this.curvature);
     }
     div(c: number): GyrovectorXY {
         return this.mult(1 / c);
     }
 
     rotate(radians: number): GyrovectorXY {
-        const result = new VectorXY([this.x, this.y]).rotate(radians);
-        return new GyrovectorXY([result.x, result.y], this.curvature);
+        const result = new VectorXY(this.x, this.y).rotate(radians);
+        return new GyrovectorXY(result.x, result.y, this.curvature);
     }
 
     dot(v: VectorXY): number {
@@ -93,11 +94,7 @@ export class GyrovectorXYSpace
         this.curvature = createCurvature(curvature);
     }
 
-    createVector([x, y]: [number, number]) {
-        return new GyrovectorXY([x, y], this.curvature);
+    createVector(x: number, y: number) {
+        return new GyrovectorXY(x, y, this.curvature);
     }
 }
-
-export const createGyrovectorXYSpace = (curvature: number) => {
-    return new GyrovectorXYSpace(curvature);
-};

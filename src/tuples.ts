@@ -8,34 +8,17 @@ export type TuplePrimitive<T, Dimension extends number> = _TupleOf<
     T,
     Dimension,
     []
-> & {
-    length: Dimension;
-    [Symbol.iterator](): ArrayIterator<T>;
-    map<U>(
-        callbackfn: (value: T, index: number, array: T[]) => U,
-        thisArg?: Readonly<ArrayLike<T>>,
-    ): U[];
-    filter(
-        predicate: (value: T, index: number, array: T[]) => unknown,
-        thisArg?: Readonly<ArrayLike<T>>,
-    ): T[];
-    reduce<U>(
-        callbackfn: (
-            previousValue: U,
-            currentValue: T,
-            currentIndex: number,
-            array: T[],
-        ) => U,
-        initialValue: U,
-    ): U;
-    [n: number]: T;
-};
+>;
 
 export class Tuple<T, Dimension extends number> {
     constructor(public tuple: TuplePrimitive<T, Dimension>) {}
 
     get length(): Dimension {
-        return this.tuple.length;
+        return (this.tuple as Array<T>).length as Dimension;
+    }
+
+    at(index: number): T {
+        return (this.tuple as Array<T>)[index];
     }
 
     static isTuplePrimitive<T, Dimension extends number>(
@@ -79,7 +62,7 @@ export class Tuple<T, Dimension extends number> {
         callbackfn: (value: T, index: number, array: T[]) => U,
         thisArg?: Readonly<ArrayLike<T>>,
     ): Tuple<U, Dimension> {
-        const result = this.tuple.map(callbackfn, thisArg);
+        const result = (this.tuple as Array<T>).map(callbackfn, thisArg);
         return new Tuple<U, Dimension>(result as TuplePrimitive<U, Dimension>);
     }
 
@@ -87,7 +70,7 @@ export class Tuple<T, Dimension extends number> {
         predicate: (value: T, index: number, array: T[]) => unknown,
         thisArg?: Readonly<ArrayLike<T>>,
     ): T[] {
-        return this.tuple.filter(predicate, thisArg);
+        return (this.tuple as Array<T>).filter(predicate, thisArg);
     }
 
     reduce<U>(
@@ -99,7 +82,7 @@ export class Tuple<T, Dimension extends number> {
         ) => U,
         initialValue: U,
     ): U {
-        return this.tuple.reduce(callbackfn, initialValue);
+        return (this.tuple as Array<T>).reduce(callbackfn, initialValue);
     }
 }
 

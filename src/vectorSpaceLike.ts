@@ -19,5 +19,7 @@ export interface WithCreateVector<
     Dimension extends number,
     Vector extends VectorLike<Vector>,
 > {
-    createVector: (tuplePrimitive: NumberTuplePrimitive<Dimension>) => Vector;
+    createVector: (
+        ...tuplePrimitive: NumberTuplePrimitive<Dimension>
+    ) => Vector;
 }

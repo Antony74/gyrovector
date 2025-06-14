@@ -3,35 +3,35 @@ import { VectorSpaceBase } from './vectorSpaceBase';
 import { WithCreateVector } from './vectorSpaceLike';
 
 export class VectorXY implements VectorLike<VectorXY> {
-    x;
-    y;
+    readonly x: number;
+    readonly y: number;
 
-    constructor([x, y]: [number, number]) {
+    constructor(x: number, y: number) {
         this.x = x;
         this.y = y;
     }
 
     add(v: VectorXY): VectorXY {
-        return new VectorXY([this.x + v.x, this.y + v.y]);
+        return new VectorXY(this.x + v.x, this.y + v.y);
     }
 
     sub(v: VectorXY): VectorXY {
-        return new VectorXY([this.x - v.x, this.y - v.y]);
+        return new VectorXY(this.x - v.x, this.y - v.y);
     }
 
     mult(c: number): VectorXY {
-        return new VectorXY([c * this.x, c * this.y]);
+        return new VectorXY(c * this.x, c * this.y);
     }
 
     div(c: number): VectorXY {
-        return new VectorXY([this.x / c, this.y / c]);
+        return new VectorXY(this.x / c, this.y / c);
     }
 
     rotate(radians: number): VectorXY {
-        return new VectorXY([
+        return new VectorXY(
             (this.x * Math.cos(radians)) - (this.y * Math.sin(radians)),
             (this.x * Math.sin(radians)) + (this.y * Math.cos(radians)),
-        ]);
+        );
     }
 
     array(): Readonly<[number, number]> {
@@ -55,11 +55,7 @@ export class VectorSpaceXY
     extends VectorSpaceBase<VectorXY>
     implements WithCreateVector<2, VectorXY>
 {
-    createVector([x, y]: [number, number]) {
-        return new VectorXY([x, y]);
+    createVector(x: number, y: number) {
+        return new VectorXY(x, y);
     }
 }
-
-export const createVectorXYSpace = () => {
-    return new VectorSpaceXY();
-};
