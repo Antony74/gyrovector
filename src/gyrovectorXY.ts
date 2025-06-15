@@ -13,9 +13,9 @@ export class GyrovectorXY implements VectorLike<2, GyrovectorXY> {
     readonly y: number;
 
     constructor(
+        public readonly curvature: Curvature,
         x: number,
         y: number,
-        public readonly curvature: Curvature,
     ) {
         this.x = x;
         this.y = y;
@@ -31,17 +31,17 @@ export class GyrovectorXY implements VectorLike<2, GyrovectorXY> {
 
         const result = mobiusAdd<2, VectorXY>(_u, _v, this.curvature);
 
-        return new GyrovectorXY(result.x, result.y, this.curvature);
+        return new GyrovectorXY(this.curvature, result.x, result.y);
     }
 
     sub(v: GyrovectorXY) {
-        return this.add(new GyrovectorXY(-v.x, -v.y, this.curvature));
+        return this.add(new GyrovectorXY(this.curvature, -v.x, -v.y));
     }
 
     mult(c: number): GyrovectorXY {
         const u = new VectorXY(this.x, this.y);
         const result = mobiusMult<2, VectorXY>(c, u, this.curvature);
-        return new GyrovectorXY(result.x, result.y, this.curvature);
+        return new GyrovectorXY(this.curvature, result.x, result.y);
     }
 
     div(c: number): GyrovectorXY {
@@ -50,7 +50,7 @@ export class GyrovectorXY implements VectorLike<2, GyrovectorXY> {
 
     rotate(radians: number): GyrovectorXY {
         const result = new VectorXY(this.x, this.y).rotate(radians);
-        return new GyrovectorXY(result.x, result.y, this.curvature);
+        return new GyrovectorXY(this.curvature, result.x, result.y);
     }
 
     dot(v: VectorXY): number {
@@ -78,6 +78,6 @@ export class GyrovectorXYSpace
     }
 
     createVector(x: number, y: number) {
-        return new GyrovectorXY(x, y, this.curvature);
+        return new GyrovectorXY(this.curvature, x, y);
     }
 }
