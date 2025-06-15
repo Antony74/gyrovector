@@ -6,6 +6,7 @@ import {
 } from './curvatureDependentTrigonometricFunctions';
 import { VectorSpaceBase } from './vectorSpaceBase';
 import { WithCreateVector } from './vectorSpaceLike';
+import { mobiusAdd, mobiusMult } from './mobius';
 
 export class GyrovectorXY implements VectorLike<2, GyrovectorXY> {
     readonly x: number;
@@ -27,21 +28,9 @@ export class GyrovectorXY implements VectorLike<2, GyrovectorXY> {
     add(v: GyrovectorXY): GyrovectorXY {
         const _u = new VectorXY(this.x, this.y);
         const _v = new VectorXY(v.x, v.y);
-        const lhs = _u.mult(
-            1 - (2 * this.curvature.value * _u.dot(_v)) + _v.dot(_v),
-        );
-        const rhs = _v.mult(1 + (this.curvature.value * _u.dot(_u)));
-        const top = lhs.add(rhs);
 
-        const bottom =
-            1 -
-            (2 * this.curvature.value * _u.dot(_v)) +
-            (this.curvature.value *
-                this.curvature.value *
-                _u.dot(_u) *
-                _v.dot(_v));
+        const result = mobiusAdd<2, VectorXY>(_u, _v, this.curvature);
 
-        const result = top.mult(1 / bottom);
         return new GyrovectorXY(result.x, result.y, this.curvature);
     }
 
@@ -51,16 +40,10 @@ export class GyrovectorXY implements VectorLike<2, GyrovectorXY> {
 
     mult(c: number): GyrovectorXY {
         const u = new VectorXY(this.x, this.y);
-        if (c === 0 || (u.x === 0 && u.y === 0)) {
-            return new GyrovectorXY(0, 0, this.curvature);
-        }
-        const magnitude = u.mag();
-        const normalized = u.mult(1 / magnitude);
-        const result = normalized.mult(
-            this.curvature.tan(c * this.curvature.atan(magnitude)),
-        );
+        const result = mobiusMult<2, VectorXY>(c, u, this.curvature);
         return new GyrovectorXY(result.x, result.y, this.curvature);
     }
+
     div(c: number): GyrovectorXY {
         return this.mult(1 / c);
     }
