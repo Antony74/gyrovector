@@ -9,7 +9,9 @@ export const mobiusAdd = <
     v: EuclideanVector,
     curvature: Curvature,
 ): EuclideanVector => {
-    const lhs = u.mult(1 - (2 * curvature.value * u.dot(v)) + v.dot(v));
+    const lhs = u.mult(
+        1 - (2 * curvature.value * u.dot(v)) - (curvature.value * v.dot(v)),
+    );
     const rhs = v.mult(1 + (curvature.value * u.dot(u)));
     const top = lhs.add(rhs);
 
