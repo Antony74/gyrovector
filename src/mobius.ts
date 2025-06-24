@@ -9,18 +9,22 @@ export const mobiusAdd = <
     v: EuclideanVector,
     curvature: Curvature,
 ): EuclideanVector => {
-    const lhs = u.mult(
-        1 - (2 * curvature.value * u.dot(v)) - (curvature.value * v.dot(v)),
-    );
-    const rhs = v.mult(1 + (curvature.value * u.dot(u)));
+    const u2kDotV = 2 * curvature.value * u.dot(v);
+    const uMagSq = u.dot(u);
+    const vMagSq = v.dot(v);
+
+    const lhs = u.mult(1 - u2kDotV - (curvature.value * vMagSq));
+    const rhs = v.mult(1 + (curvature.value * uMagSq));
     const top = lhs.add(rhs);
 
     const bottom =
-        1 -
-        (2 * curvature.value * u.dot(v)) +
-        (curvature.value * curvature.value * u.dot(u) * v.dot(v));
+        1 - u2kDotV + (curvature.value * curvature.value * uMagSq * vMagSq);
 
-    return top.mult(1 / bottom);
+    const result = top.mult(1 / bottom);
+
+    // console.log({ u, v, lhs, rhs, bottom, result });
+
+    return result;
 };
 
 export const mobiusMult = <
