@@ -27,9 +27,9 @@ export class Gyrovector<Dimension extends number>
         return this._tuple.tuple;
     }
 
-    add(v: Gyrovector<Dimension>): Gyrovector<Dimension> {
-        const _u = new Vector<Dimension>(...this._tuple.tuple);
-        const _v = new Vector<Dimension>(...v._tuple.tuple);
+    add(u: Gyrovector<Dimension>): Gyrovector<Dimension> {
+        const _u = new Vector<Dimension>(...u._tuple.tuple);
+        const _v = new Vector<Dimension>(...this._tuple.tuple);
 
         const result = mobiusAdd<Dimension, Vector<Dimension>>(
             _u,

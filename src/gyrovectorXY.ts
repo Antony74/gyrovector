@@ -25,9 +25,9 @@ export class GyrovectorXY implements VectorLike<2, GyrovectorXY> {
         return [this.x, this.y];
     }
 
-    add(v: GyrovectorXY): GyrovectorXY {
-        const _u = new VectorXY(this.x, this.y);
-        const _v = new VectorXY(v.x, v.y);
+    add(u: GyrovectorXY): GyrovectorXY {
+        const _u = new VectorXY(u.x, u.y);
+        const _v = new VectorXY(this.x, this.y);
 
         const result = mobiusAdd<2, VectorXY>(_u, _v, this.curvature);
 
