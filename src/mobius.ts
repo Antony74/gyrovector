@@ -1,9 +1,9 @@
 import { Curvature } from './curvatureDependentTrigonometricFunctions';
-import { VectorLike } from './vectorLike';
+import { VectorLikeWithMeasure } from './vectorLike';
 
 export const mobiusAdd = <
     Dimension extends number,
-    EuclideanVector extends VectorLike<Dimension, EuclideanVector>,
+    EuclideanVector extends VectorLikeWithMeasure<Dimension, EuclideanVector>,
 >(
     u: EuclideanVector,
     v: EuclideanVector,
@@ -29,7 +29,7 @@ export const mobiusAdd = <
 
 export const mobiusMult = <
     Dimension extends number,
-    EuclideanVector extends VectorLike<Dimension, EuclideanVector>,
+    EuclideanVector extends VectorLikeWithMeasure<Dimension, EuclideanVector>,
 >(
     c: number,
     u: EuclideanVector,

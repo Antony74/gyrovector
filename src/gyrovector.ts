@@ -73,20 +73,6 @@ export class Gyrovector<Dimension extends number>
         );
         return new Gyrovector(this.curvature, ...result.tuple.tuple);
     }
-
-    dot(v: Gyrovector<Dimension>): number {
-        return this._tuple.reduce((acc, value, index) => {
-            return acc + (value * v._tuple.at(index));
-        }, 0);
-    }
-
-    magSq(): number {
-        return this.dot(this);
-    }
-
-    mag(): number {
-        return Math.sqrt(this.magSq());
-    }
 }
 
 export class GyrovectorSpace<Dimension extends number>
