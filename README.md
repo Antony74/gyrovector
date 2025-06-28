@@ -6,9 +6,9 @@ Generalized immutable vector classes for hyperbolic, Euclidean, and spherical ge
 
 Non-Euclidean geometry is weird, let't try to have some fun with it!
 
-This package requires no familiarity with P5 and can be used entirely independently of P5, and indeed has no production dependencies at all.  But, if you've ever used the `P5.Vector` class, then you're going to feel at home... at least until curved space starts messing with your mind! ;-)
+This package requires no familiarity with [P5](https://p5js.org/) and can be used entirely independently of P5, and indeed has no production dependencies at all.  But, if you've ever used the [p5.Vector](https://p5js.org/reference/p5/p5.Vector/) class, then you're going to feel at home... at least until curved space starts messing with your mind! ;-)
 
-Once you've called the not-exactly-catchily titled `GyrovectorSpaceFactory.create()`, I promise every function name you subsequently encounter will be familiar.  However, only a subset `P5.Vector` functions are supported at present.
+After you've called the not-exactly-catchily titled `GyrovectorSpaceFactory.create()`, I promise every function name you subsequently encounter will be familiar.  However, only a subset `p5.Vector` functions are supported at present.
 
 The vectors here are immutable, so their behavior not identical - but if you've every had trouble tracking down a bug because you forgot to call `copy()`, you'll probably be grateful for that.
 
@@ -43,3 +43,8 @@ Because gyrovectors behave in ways which might be unfamiliar, it is suggested th
 ## Performance
 
 ## Gyrovector resources
+
+- [A Universal Model for Hyperbolic, Euclidean and Spherical Geometries](https://andbloch.github.io/K-Stereographic-Model/)
+- [Gyrovectors (GitHub)](https://github.com/joshgreaves/Gyrovectors) - JavaScript example - Playing with Gyrovectors.
+- [Hyperbolica (YouTube)](https://www.youtube.com/playlist?list=PLh9DXIT3m6N4qJK9GKQB3yk61tVe6qJvA) - Devlog for the non-Euclidean game Hyperbolica.
+- [HyperEngine (GitHub)](https://github.com/HackerPoet/HyperEngine) - The Non-Euclidean Unity Backend for Hyperbolica.
