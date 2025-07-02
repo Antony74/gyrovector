@@ -2,6 +2,7 @@
     "name": "gyrovector",
     "version": "1.0.0",
     "scripts": {
+        "doc": "typedoc",
         "lint": "prettier --write . && eslint src --fix",
         "start": "rimraf dist && tsc"
     },
@@ -30,6 +31,8 @@
         "eslint-plugin-no-mixed-operators": "^1.1.1",
         "prettier": "^3.5.3",
         "rimraf": "^6.0.1",
+        "typedoc": "^0.28.6",
+        "typedoc-plugin-markdown": "^4.7.0",
         "typescript": "^5.8.3",
         "typescript-eslint": "^8.32.1"
     },
