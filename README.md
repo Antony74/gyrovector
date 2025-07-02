@@ -40,6 +40,55 @@ Because gyrovectors behave in ways which might be unfamiliar, it is suggested th
 
 ## Documentation
 
+### GyrovectorSpaceFactory
+
+#### Methods
+
+##### create
+
+    static create(dimension: number, curvature: number)
+
+**dimension:** number of spatial dimensions
+
+**curvature:** curvature of space.  Negative for hyperbolic space, zero for Euclidean space, positive for spherical space.
+
+**returns:** A [VectorSpaceLike](#VectorSpaceLike) object appropriate for the specified parameters.
+
+<a name="VectorSpaceLike"></a>
+### VectorSpaceLike
+
+#### Methods
+
+    add: (u: Vector, v: Vector) => Vector;
+
+**u:** The first vector to add
+
+**v:** The second vector to add
+
+**returns:** A vector representing the sum of the addition.  The order of the parameters matters (except in Euclidean space) because gyrovector/mobius addition is not associative.
+
+    sub: (u: Vector, v: Vector) => Vector;
+
+**u:** The vector to subtract from (minuend)
+
+**v:** The vector to subtract (subtrahend)
+
+**returns:** A vector representing the result of the subtraction.
+
+    mult: (c: number, u: Vector) => Vector;
+    div: (c: number, u: Vector) => Vector;
+
+    rotate: (
+        u: Vector,
+        radians: number,
+        firstAxis?: number,
+        secondAxis?: number,
+    ) => Vector;
+
+    createVector: (
+        ...tuplePrimitive: NumberTuplePrimitive<Dimension>
+    ) => Vector;
+
 ## Performance
 
 ## Gyrovector resources
