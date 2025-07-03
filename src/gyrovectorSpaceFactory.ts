@@ -26,7 +26,8 @@ export class GyrovectorSpaceFactory {
      * Creates a 2-dimensional gyrovector space.
      *
      * @param dimension - Must be 2
-     * @param curvature - Curvature of space.  Negative for hyperbolic space, zero for Euclidean space, positive for spherical space.
+     * @param curvature - Curvature of space.  Negative for hyperbolic space, zero for Euclidean space,
+     * positive for spherical space.
      * @returns An instance of GyrovectorXYSpace
      *
      * @example
@@ -57,7 +58,8 @@ export class GyrovectorSpaceFactory {
      * Creates a curved gyrovector space in arbitrary dimension.
      *
      * @param dimension - The number of spatial dimensions
-     * @param curvature - Curvature of space.  Negative for hyperbolic space, zero for Euclidean space, positive for spherical space.
+     * @param curvature - Curvature of space.  Negative for hyperbolic space, zero for Euclidean space,
+     * positive for spherical space.
      * @returns A specific instance of vector space or a gyrovector space
      *
      * @example
@@ -74,7 +76,8 @@ export class GyrovectorSpaceFactory {
      * Creates a gyrovector space
      *
      * @param dimension - The number of spatial dimensions
-     * @param curvature - Curvature of space.  Negative for hyperbolic space, zero for Euclidean space, positive for spherical space.
+     * @param curvature - Curvature of space.  Negative for hyperbolic space, zero for Euclidean space,
+     * positive for spherical space.
      * @returns A specific instance of vector space or a gyrovector space
      */
     static create(dimension: number, curvature: number) {
