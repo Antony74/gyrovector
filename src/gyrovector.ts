@@ -6,7 +6,7 @@ import {
 } from './curvatureDependentTrigonometricFunctions';
 
 import { VectorSpaceBase } from './vectorSpaceBase';
-import { WithCreateVector } from './vectorSpaceLike';
+import { VectorSpaceLike } from './vectorSpaceLike';
 import { mobiusAdd, mobiusMult } from './mobius';
 import { NumberTuple, NumberTuplePrimitive } from './tuples';
 import { Vector } from './vector';
@@ -77,7 +77,7 @@ export class Gyrovector<Dimension extends number>
 
 export class GyrovectorSpace<Dimension extends number>
     extends VectorSpaceBase<Dimension, Gyrovector<Dimension>>
-    implements WithCreateVector<Dimension, Gyrovector<Dimension>>
+    implements VectorSpaceLike<Dimension, Gyrovector<Dimension>>
 {
     curvature;
 

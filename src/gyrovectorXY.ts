@@ -5,7 +5,7 @@ import {
     Curvature,
 } from './curvatureDependentTrigonometricFunctions';
 import { VectorSpaceBase } from './vectorSpaceBase';
-import { WithCreateVector } from './vectorSpaceLike';
+import { VectorSpaceLike } from './vectorSpaceLike';
 import { mobiusAdd, mobiusMult } from './mobius';
 
 export class GyrovectorXY implements VectorLike<2, GyrovectorXY> {
@@ -56,7 +56,7 @@ export class GyrovectorXY implements VectorLike<2, GyrovectorXY> {
 
 export class GyrovectorXYSpace
     extends VectorSpaceBase<2, GyrovectorXY>
-    implements WithCreateVector<2, GyrovectorXY>
+    implements VectorSpaceLike<2, GyrovectorXY>
 {
     curvature;
 

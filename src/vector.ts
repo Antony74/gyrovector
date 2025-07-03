@@ -1,7 +1,7 @@
 import { NumberTuple, NumberTuplePrimitive } from './tuples';
 import { VectorLike } from './vectorLike';
 import { VectorSpaceBase } from './vectorSpaceBase';
-import { WithCreateVector } from './vectorSpaceLike';
+import { VectorSpaceLike } from './vectorSpaceLike';
 
 export class Vector<Dimension extends number>
     implements VectorLike<Dimension, Vector<Dimension>>
@@ -91,7 +91,7 @@ export class Vector<Dimension extends number>
 
 export class VectorSpace<Dimension extends number>
     extends VectorSpaceBase<Dimension, Vector<Dimension>>
-    implements WithCreateVector<Dimension, Vector<Dimension>>
+    implements VectorSpaceLike<Dimension, Vector<Dimension>>
 {
     constructor() {
         super();

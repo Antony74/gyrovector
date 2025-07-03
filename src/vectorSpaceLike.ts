@@ -16,13 +16,13 @@ export type VectorSpaceLike<
         firstAxis?: number,
         secondAxis?: number,
     ) => Vector;
-};
 
-export type WithCreateVector<
-    Dimension extends number,
-    Vector extends VectorLike<Dimension, Vector>,
-> = {
     createVector: (
         ...tuplePrimitive: NumberTuplePrimitive<Dimension>
     ) => Vector;
 };
+
+export type VectorSpaceLikeWithoutCreate<
+    Dimension extends number,
+    Vector extends VectorLike<Dimension, Vector>,
+> = Omit<VectorSpaceLike<Dimension, Vector>, 'createVector'>;

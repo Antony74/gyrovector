@@ -50,11 +50,12 @@ Because gyrovectors behave in ways which might be unfamiliar, it is suggested th
 
 **dimension:** number of spatial dimensions
 
-**curvature:** curvature of space.  Negative for hyperbolic space, zero for Euclidean space, positive for spherical space.
+**curvature:** curvature of space. Negative for hyperbolic space, zero for Euclidean space, positive for spherical space.
 
 **returns:** A [VectorSpaceLike](#VectorSpaceLike) object appropriate for the specified parameters.
 
 <a name="VectorSpaceLike"></a>
+
 ### VectorSpaceLike
 
 #### Methods
@@ -65,7 +66,7 @@ Because gyrovectors behave in ways which might be unfamiliar, it is suggested th
 
 **v:** The second vector to add
 
-**returns:** A vector representing the sum of the addition.  The order of the parameters matters (except in Euclidean space) because gyrovector/mobius addition is not associative.
+**returns:** A vector representing the sum of the addition. The order of the parameters matters (except in Euclidean space) because gyrovector/mobius addition is not associative.
 
     sub: (u: Vector, v: Vector) => Vector;
 
