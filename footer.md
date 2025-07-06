@@ -1,3 +1,5 @@
+## Performance
+
 ## Gyrovector resources
 
 - [A Universal Model for Hyperbolic, Euclidean and Spherical Geometries](https://andbloch.github.io/K-Stereographic-Model/)
