@@ -2,7 +2,7 @@
     "name": "gyrovector",
     "version": "1.0.0",
     "scripts": {
-        "doc": "typedoc",
+        "doc": "tsx docs.ts",
         "lint": "prettier --write . && eslint src --fix",
         "start": "rimraf dist && tsc"
     },
@@ -27,10 +27,12 @@
     "description": "Gyrovector classes for hyperbolic, Euclidean, and spherical geometries",
     "devDependencies": {
         "@eslint/js": "^9.27.0",
+        "@types/node": "^24.0.10",
         "eslint": "^9.27.0",
         "eslint-plugin-no-mixed-operators": "^1.1.1",
         "prettier": "^3.5.3",
         "rimraf": "^6.0.1",
+        "tsx": "^4.20.3",
         "typedoc": "^0.28.6",
         "typedoc-plugin-markdown": "^4.7.0",
         "typescript": "^5.8.3",
