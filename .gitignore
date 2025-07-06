@@ -1,3 +1,5 @@
 node_modules
 dist
-docs
+docs/*
+!docs/header.md
+!docs/footer.md
