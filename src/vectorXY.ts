@@ -2,6 +2,9 @@ import { VectorLike } from './vectorLike';
 import { VectorSpaceBase } from './vectorSpaceBase';
 import { VectorSpaceLike } from './vectorSpaceLike';
 
+/**
+ * Two dimensional Euclidean vector represented by the fields {x, y}
+ */
 export class VectorXY implements VectorLike<2, VectorXY> {
     readonly x: number;
     readonly y: number;
@@ -51,6 +54,9 @@ export class VectorXY implements VectorLike<2, VectorXY> {
     }
 }
 
+/**
+ * Two dimensional Euclidean vector space where the vectors are represented by the fields {x, y}
+ */
 export class VectorSpaceXY
     extends VectorSpaceBase<2, VectorXY>
     implements VectorSpaceLike<2, VectorXY>

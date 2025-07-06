@@ -1,6 +1,9 @@
 import { VectorLike } from './vectorLike';
 import { VectorSpaceLikeWithoutCreate } from './vectorSpaceLike';
 
+/**
+ * Base class making it easy to define vector spaces which are mostly boilerplate
+ */
 export class VectorSpaceBase<
     Dimension extends number,
     Vector extends VectorLike<Dimension, Vector>,

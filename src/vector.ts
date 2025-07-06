@@ -3,6 +3,9 @@ import { VectorLike } from './vectorLike';
 import { VectorSpaceBase } from './vectorSpaceBase';
 import { VectorSpaceLike } from './vectorSpaceLike';
 
+/**
+ * n-dimensional Euclidean vector represented by an array of the correct length
+ */
 export class Vector<Dimension extends number>
     implements VectorLike<Dimension, Vector<Dimension>>
 {
@@ -89,6 +92,9 @@ export class Vector<Dimension extends number>
     }
 }
 
+/**
+ * n-dimensional Euclidean vector space for vectors represented by an array of the correct length
+ */
 export class VectorSpace<Dimension extends number>
     extends VectorSpaceBase<Dimension, Vector<Dimension>>
     implements VectorSpaceLike<Dimension, Vector<Dimension>>

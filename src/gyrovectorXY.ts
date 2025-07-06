@@ -8,6 +8,9 @@ import { VectorSpaceBase } from './vectorSpaceBase';
 import { VectorSpaceLike } from './vectorSpaceLike';
 import { mobiusAdd, mobiusMult } from './mobius';
 
+/**
+ * 2-dimensional gyrovector represented by the fields {x, y}
+ */
 export class GyrovectorXY implements VectorLike<2, GyrovectorXY> {
     readonly x: number;
     readonly y: number;
@@ -54,6 +57,9 @@ export class GyrovectorXY implements VectorLike<2, GyrovectorXY> {
     }
 }
 
+/**
+ * 2-dimensional gyrovector space for gyrovectors represented by the fields {x, y}
+ */
 export class GyrovectorXYSpace
     extends VectorSpaceBase<2, GyrovectorXY>
     implements VectorSpaceLike<2, GyrovectorXY>

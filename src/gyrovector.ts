@@ -11,6 +11,9 @@ import { mobiusAdd, mobiusMult } from './mobius';
 import { NumberTuple, NumberTuplePrimitive } from './tuples';
 import { Vector } from './vector';
 
+/**
+ * n-dimensional gyrovector represented by an array of the correct length
+ */
 export class Gyrovector<Dimension extends number>
     implements VectorLike<Dimension, Gyrovector<Dimension>>
 {
@@ -75,6 +78,9 @@ export class Gyrovector<Dimension extends number>
     }
 }
 
+/**
+ * n-dimensional gyrovector space for gyrovectors represented by an array of the correct length
+ */
 export class GyrovectorSpace<Dimension extends number>
     extends VectorSpaceBase<Dimension, Gyrovector<Dimension>>
     implements VectorSpaceLike<Dimension, Gyrovector<Dimension>>
