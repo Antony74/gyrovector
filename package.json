@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "scripts": {
         "doc": "tsx docs.ts",
+        "docServe": "http-server docs",
         "lint": "prettier --write . && eslint src --fix",
         "start": "rimraf dist && tsc"
     },
@@ -30,11 +31,11 @@
         "@types/node": "^24.0.10",
         "eslint": "^9.27.0",
         "eslint-plugin-no-mixed-operators": "^1.1.1",
+        "http-server": "^14.1.1",
         "prettier": "^3.5.3",
         "rimraf": "^6.0.1",
         "tsx": "^4.20.3",
         "typedoc": "^0.28.6",
-        "typedoc-plugin-markdown": "^4.7.0",
         "typescript": "^5.8.3",
         "typescript-eslint": "^8.32.1"
     },
