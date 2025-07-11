@@ -79,6 +79,11 @@ export class GyrovectorSpaceFactory {
      * @param curvature - Curvature of space.  Negative for hyperbolic space, zero for Euclidean space,
      * positive for spherical space.
      * @returns A specific instance of vector space or a gyrovector space
+     * 
+     * @example
+     * ```ts
+     * const space = GyrovectorSpaceFactory.create(2, 0.5);
+     * ```
      */
     static create(dimension: number, curvature: number) {
         if (dimension === 2) {

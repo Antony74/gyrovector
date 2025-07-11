@@ -40,6 +40,35 @@ Because gyrovectors behave in ways which might be unfamiliar, it is suggested th
 
 ## Documentation
 
+### Class GyrovectorSpaceFactory
+
+A factory class for creating instances of vector spaces and gyrovector spaces
+based on dimension and curvature.
+
+### Class VectorSpaceLike
+
+A generic type representing vector space or gyrovector space.
+
+### Class VectorLike
+
+A generic type representing vector or gyrovector.
+
+### Class Gyrovector
+
+n-dimensional gyrovector represented by an array of the correct length
+
+### Class GyrovectorXY
+
+2-dimensional gyrovector represented by the fields {x, y}
+
+### Class Vector
+
+n-dimensional Euclidean vector represented by an array of the correct length
+
+### Class VectorXY
+
+Two dimensional Euclidean vector represented by the fields {x, y}
+
 ## Performance
 
 ## Gyrovector resources
