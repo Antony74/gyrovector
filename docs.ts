@@ -8,7 +8,7 @@ import prettier from 'prettier';
 type Comment = { summary: [{ text: string }] };
 
 type Node = {
-    name: string;   
+    name: string;
     children?: Node[];
     comment?: Comment;
     signatures?: Node[];
@@ -17,9 +17,15 @@ type Node = {
 
 const nodeLog = (kind: string, node: Node, depth: number) => {
     console.log(`${' '.repeat(depth * 4)}${kind} ${node.name}`);
-    (node.children ?? []).forEach((child) => nodeLog('child', child, depth + 1));
-    (node.signatures ?? []).forEach((child) => nodeLog('sig', child, depth + 1));
-    (node.parameters ?? []).forEach((child) => nodeLog('param', child, depth + 1));
+    (node.children ?? []).forEach((child) =>
+        nodeLog('child', child, depth + 1),
+    );
+    (node.signatures ?? []).forEach((child) =>
+        nodeLog('sig', child, depth + 1),
+    );
+    (node.parameters ?? []).forEach((child) =>
+        nodeLog('param', child, depth + 1),
+    );
 };
 
 const findNode = (name: string, parent: Node): Node | undefined => {
@@ -34,20 +40,40 @@ const getSummary = (node: Node): string => {
     return summary.join('\n');
 };
 
-const documentSignature = (node: Node): string => {
-    const params = (node.parameters ?? []).map((param) => param.name).join(`, `);
+const summarizeSignature = (node: Node): string => {
+    const params = (node.parameters ?? [])
+        .map((param) => param.name)
+        .join(`, `);
 
     return `> ${node.name}(${params})`;
 };
 
+const documentParameter = (node: Node): string => {
+    return [`###### ${node.name}`, ``, getSummary(node)].join('\n');
+};
+
+const documentParameters = (node: Node): string => {
+    const params = node.parameters ?? [];
+
+    return [`##### Parameters`, ``, ...params.map(documentParameter)].join(
+        '\n',
+    );
+};
+
 const documentMethod = (node: Node): string => {
+    const signatures = (node.signatures ?? []);
+
     return [
         `#### ${node.name}`,
         ``,
-        ...(node.signatures ?? []).map(documentSignature),
+        ...signatures.map(summarizeSignature),
         ``,
         getSummary(node),
-    ].join('\n');
+        ``,
+        ...signatures.map(documentParameters),
+    ]
+        .join('\n')
+        .trim();
 };
 
 const documentClass = (node: Node): string => {
@@ -126,6 +152,8 @@ const main = async () => {
 
     const factory = findNode('GyrovectorSpaceFactory', factoryModule)!;
     factory.children?.shift();
+    factory.children![0].signatures =
+        factory.children![0].signatures?.slice(-1);
 
     const classes: Node[] = [
         factory,

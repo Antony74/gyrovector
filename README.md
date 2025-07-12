@@ -48,11 +48,19 @@ based on dimension and curvature.
 #### create
 
 > create(dimension, curvature)
-> create(dimension, curvature)
-> create(dimension, curvature)
-> create(dimension, curvature)
 
 Creates a gyrovector space
+
+##### Parameters
+
+###### dimension
+
+The number of spatial dimensions
+
+###### curvature
+
+Curvature of space. Negative for hyperbolic space, zero for Euclidean space,
+positive for spherical space.
 
 ### Class VectorSpaceLike
 
@@ -90,25 +98,65 @@ A generic type representing vector or gyrovector.
 
 > add(v)
 
+##### Parameters
+
+###### v
+
+The vector to add
+
 #### array
 
 > array()
+
+##### Parameters
 
 #### div
 
 > div(c)
 
+##### Parameters
+
+###### c
+
+The scalar divisor
+
 #### mult
 
 > mult(c)
+
+##### Parameters
+
+###### c
+
+The scalar multiplier
 
 #### rotate
 
 > rotate(radians, firstAxis, secondAxis)
 
+##### Parameters
+
+###### radians
+
+The rotation angle in radians
+
+###### firstAxis
+
+The first axis in the plane of rotation (optional)
+
+###### secondAxis
+
+The second axis in the plane of rotation (optional)
+
 #### sub
 
 > sub(v)
+
+##### Parameters
+
+###### v
+
+The vector to subtract
 
 ### Class Gyrovector
 
