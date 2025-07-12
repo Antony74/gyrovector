@@ -13,19 +13,29 @@ type Node = {
     comment?: Comment;
     signatures?: Node[];
     parameters?: Node[];
+    type?: { declaration?: Node };
 };
 
-const nodeLog = (kind: string, node: Node, depth: number) => {
-    console.log(`${' '.repeat(depth * 4)}${kind} ${node.name}`);
+const nodeLog = (kind: string, node: Node, depth: number): string => {
+    const result = [`${' '.repeat(depth * 4)}${kind} ${node.name}`];
+
     (node.children ?? []).forEach((child) =>
-        nodeLog('child', child, depth + 1),
+        result.push(nodeLog('child', child, depth + 1)),
     );
+
     (node.signatures ?? []).forEach((child) =>
-        nodeLog('sig', child, depth + 1),
+        result.push(nodeLog('sig', child, depth + 1)),
     );
+
     (node.parameters ?? []).forEach((child) =>
-        nodeLog('param', child, depth + 1),
+        result.push(nodeLog('param', child, depth + 1)),
     );
+
+    if (node.type && node.type.declaration) {
+        result.push(nodeLog('type', node.type.declaration, depth + 1));
+    }
+
+    return result.join('\n');
 };
 
 const findNode = (name: string, parent: Node): Node | undefined => {
@@ -61,7 +71,7 @@ const documentParameters = (node: Node): string => {
 };
 
 const documentMethod = (node: Node): string => {
-    const signatures = (node.signatures ?? []);
+    const signatures = node.signatures ?? [];
 
     return [
         `#### ${node.name}`,
@@ -116,8 +126,8 @@ const main = async () => {
         await app.generateJson(project, path.join(docsPath, 'docs.json'));
     }
 
-    // README.md
-    console.log('README.md');
+    // docs/tree.txt
+    console.log('tree.txt');
 
     const [rawJson, header, footer, rawPackageJson] = await Promise.all(
         ['docs/docs.json', 'header.md', 'footer.md', 'package.json']
@@ -128,7 +138,13 @@ const main = async () => {
     const root: Node = JSON.parse(rawJson);
     const packageJson = JSON.parse(rawPackageJson);
 
-    nodeLog('root', root, 0);
+    await fsp.writeFile(
+        path.join(docsPath, 'tree.txt'),
+        nodeLog('root', root, 0),
+    );
+
+    // README.md
+    console.log('README.md');
 
     const prettierOptions = { ...packageJson.prettier, parser: 'markdown' };
 
