@@ -68,27 +68,103 @@ A generic type representing vector space or gyrovector space.
 
 #### add
 
+> add(u, v)
+
 Adds two vectors.
+
+##### Parameters
+
+###### u
+
+The first vector
+
+###### v
+
+The second vector
 
 #### createVector
 
+> createVector(tuplePrimitive)
+
 Constructs a new vector.
+
+##### Parameters
+
+###### tuplePrimitive
+
+An array of the correct length for the number of dimensions in this vector space
 
 #### div
 
+> div(c, u)
+
 Divides a vector by a scalar.
+
+##### Parameters
+
+###### c
+
+The scalar divisor
+
+###### u
+
+The vector to divide
 
 #### mult
 
+> mult(c, u)
+
 Multiplies a vector by a scalar.
+
+##### Parameters
+
+###### c
+
+The scalar multiplier
+
+###### u
+
+The vector to scale
 
 #### rotate
 
+> rotate(u, radians, firstAxis, secondAxis)
+
 Rotates a vector in a specified plane by a given angle (in radians).
+
+##### Parameters
+
+###### u
+
+The vector to rotate
+
+###### radians
+
+The angle of rotation in radians
+
+###### firstAxis
+
+The first axis in the plane of rotation (optional)
+
+###### secondAxis
+
+The second axis in the plane of rotation (optional)
 
 #### sub
 
+> sub(u, v)
+
 Subtracts one vector from another.
+
+##### Parameters
+
+###### u
+
+The vector to subtract from
+
+###### v
+
+The vector to subtract
 
 ### Class VectorLike
 

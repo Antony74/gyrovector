@@ -50,12 +50,12 @@ const getSummary = (node: Node): string => {
     return summary.join('\n');
 };
 
-const summarizeSignature = (node: Node): string => {
+const summarizeSignature = (name: string, node: Node): string => {
     const params = (node.parameters ?? [])
         .map((param) => param.name)
         .join(`, `);
 
-    return `> ${node.name}(${params})`;
+    return `> ${name}(${params})`;
 };
 
 const documentParameter = (node: Node): string => {
@@ -71,12 +71,13 @@ const documentParameters = (node: Node): string => {
 };
 
 const documentMethod = (node: Node): string => {
-    const signatures = node.signatures ?? [];
+    const signatures =
+        node.signatures ?? node.type?.declaration?.signatures ?? [];
 
     return [
         `#### ${node.name}`,
         ``,
-        ...signatures.map(summarizeSignature),
+        ...signatures.map((sig) => summarizeSignature(node.name, sig)),
         ``,
         getSummary(node),
         ``,
