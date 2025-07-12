@@ -7,23 +7,55 @@ import prettier from 'prettier';
 
 type Comment = { summary: [{ text: string }] };
 
-type Node = { name: string; children?: Node[]; comment?: Comment };
+type Node = {
+    name: string;   
+    children?: Node[];
+    comment?: Comment;
+    signatures?: Node[];
+    parameters?: Node[];
+};
 
-const nodeLog = (node: Node, depth: number) => {
-    console.log(`${' '.repeat(depth * 4)}${node.name}`);
-    (node.children ?? []).forEach((child) => nodeLog(child, depth + 1));
+const nodeLog = (kind: string, node: Node, depth: number) => {
+    console.log(`${' '.repeat(depth * 4)}${kind} ${node.name}`);
+    (node.children ?? []).forEach((child) => nodeLog('child', child, depth + 1));
+    (node.signatures ?? []).forEach((child) => nodeLog('sig', child, depth + 1));
+    (node.parameters ?? []).forEach((child) => nodeLog('param', child, depth + 1));
 };
 
 const findNode = (name: string, parent: Node): Node | undefined => {
     return (parent.children ?? []).find((node) => node.name === name);
 };
 
-const documentClass = (node: Node): string => {
+const getSummary = (node: Node): string => {
     const summary = node.comment
         ? node.comment.summary.map((summary) => summary.text)
         : [];
 
-    return [`### Class ${node.name}`, ``, ...summary].join('\n');
+    return summary.join('\n');
+};
+
+const documentSignature = (node: Node): string => {
+    const params = (node.parameters ?? []).map((param) => param.name).join(`, `);
+
+    return `> ${node.name}(${params})`;
+};
+
+const documentMethod = (node: Node): string => {
+    return [
+        `#### ${node.name}`,
+        ``,
+        ...(node.signatures ?? []).map(documentSignature),
+        ``,
+        getSummary(node),
+    ].join('\n');
+};
+
+const documentClass = (node: Node): string => {
+    const children = (node.children ?? []).map(documentMethod);
+
+    return [`### Class ${node.name}`, ``, getSummary(node), ``, ...children]
+        .join('\n')
+        .trim();
 };
 
 const main = async () => {
@@ -70,7 +102,7 @@ const main = async () => {
     const root: Node = JSON.parse(rawJson);
     const packageJson = JSON.parse(rawPackageJson);
 
-    nodeLog(root, 0);
+    nodeLog('root', root, 0);
 
     const prettierOptions = { ...packageJson.prettier, parser: 'markdown' };
 
@@ -92,14 +124,17 @@ const main = async () => {
         findNode('vectorXY', root)!,
     ];
 
+    const factory = findNode('GyrovectorSpaceFactory', factoryModule)!;
+    factory.children?.shift();
+
     const classes: Node[] = [
-        findNode('GyrovectorSpaceFactory', factoryModule)!,
+        factory,
         findNode('VectorSpaceLike', spaceModule)!,
         findNode('VectorLike', vectorLikeModule)!,
-        findNode('Gyrovector', gyrovectorModule)!,
-        findNode('GyrovectorXY', gyrovectorXYModule)!,
-        findNode('Vector', vectorModule)!,
-        findNode('VectorXY', vectorXYModule)!,
+        { ...findNode('Gyrovector', gyrovectorModule)!, children: [] },
+        { ...findNode('GyrovectorXY', gyrovectorXYModule)!, children: [] },
+        { ...findNode('Vector', vectorModule)!, children: [] },
+        { ...findNode('VectorXY', vectorXYModule)!, children: [] },
     ];
 
     const sections = [header, ...classes.map(documentClass), footer];

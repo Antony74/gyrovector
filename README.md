@@ -45,13 +45,70 @@ Because gyrovectors behave in ways which might be unfamiliar, it is suggested th
 A factory class for creating instances of vector spaces and gyrovector spaces
 based on dimension and curvature.
 
+#### create
+
+> create(dimension, curvature)
+> create(dimension, curvature)
+> create(dimension, curvature)
+> create(dimension, curvature)
+
+Creates a gyrovector space
+
 ### Class VectorSpaceLike
 
 A generic type representing vector space or gyrovector space.
 
+#### add
+
+Adds two vectors.
+
+#### createVector
+
+Constructs a new vector.
+
+#### div
+
+Divides a vector by a scalar.
+
+#### mult
+
+Multiplies a vector by a scalar.
+
+#### rotate
+
+Rotates a vector in a specified plane by a given angle (in radians).
+
+#### sub
+
+Subtracts one vector from another.
+
 ### Class VectorLike
 
 A generic type representing vector or gyrovector.
+
+#### add
+
+> add(v)
+
+#### array
+
+> array()
+
+#### div
+
+> div(c)
+
+#### mult
+
+> mult(c)
+
+#### rotate
+
+> rotate(radians, firstAxis, secondAxis)
+
+#### sub
+
+> sub(v)
 
 ### Class Gyrovector
 
