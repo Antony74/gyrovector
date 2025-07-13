@@ -14,5 +14,11 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+__exportStar(require("./gyrovector"), exports);
 __exportStar(require("./gyrovectorSpaceFactory"), exports);
+__exportStar(require("./gyrovectorXY"), exports);
+__exportStar(require("./vector"), exports);
+__exportStar(require("./vectorLike"), exports);
+__exportStar(require("./vectorSpaceLike"), exports);
+__exportStar(require("./vectorXY"), exports);
 //# sourceMappingURL=index.js.map
