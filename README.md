@@ -45,7 +45,7 @@ Because gyrovectors behave in ways which might be unfamiliar, it is suggested th
 A factory class for creating instances of vector spaces and gyrovector spaces
 based on dimension and curvature.
 
-#### create
+#### Method: static create()
 
 > create(`dimension`, `curvature`)
 
@@ -76,7 +76,7 @@ const space = GyrovectorSpaceFactory.create(2, 0.5);
 
 A generic type representing vector space or gyrovector space.
 
-#### add
+#### Method: add()
 
 > add(`u`, `v`)
 
@@ -103,7 +103,7 @@ A vector representing the sum of the addition. The order of the parameters matte
 const result = space.add(u, v);
 ```
 
-#### createVector
+#### Method: createVector()
 
 > createVector(`tuplePrimitive`)
 
@@ -125,7 +125,7 @@ A new vector instance
 const v = space.createVector(1, 2, 3);
 ```
 
-#### div
+#### Method: div()
 
 > div(`c`, `u`)
 
@@ -151,7 +151,7 @@ The resulting vector from u / c
 const result = space.div(2, u);
 ```
 
-#### mult
+#### Method: mult()
 
 > mult(`c`, `u`)
 
@@ -177,7 +177,7 @@ A new scaled vector
 const result = space.mult(2, u);
 ```
 
-#### rotate
+#### Method: rotate()
 
 > rotate(`u`, `radians`, `firstAxis`, `secondAxis`)
 
@@ -211,7 +211,7 @@ A new rotated vector
 const result = space.rotate(u, Math.PI / 2, 0, 1);
 ```
 
-#### sub
+#### Method: sub()
 
 > sub(`u`, `v`)
 
@@ -241,7 +241,7 @@ const result = space.sub(u, v);
 
 A generic type representing vector or gyrovector.
 
-#### add
+#### Method: add()
 
 > add(`v`)
 
@@ -261,7 +261,7 @@ A new vector representing the sum
 const result = u.add(v);
 ```
 
-#### array
+#### Method: array()
 
 > array()
 
@@ -275,7 +275,7 @@ const result = u.add(v);
 const coords = v.array(); // e.g., [1, 2, 3]
 ```
 
-#### div
+#### Method: div()
 
 > div(`c`)
 
@@ -295,7 +295,7 @@ A new vector representing the result of the division
 const result = u.div(2);
 ```
 
-#### mult
+#### Method: mult()
 
 > mult(`c`)
 
@@ -315,7 +315,7 @@ A new vector representing the result of the multiplication
 const result = u.mult(2);
 ```
 
-#### rotate
+#### Method: rotate()
 
 > rotate(`radians`, `firstAxis`, `secondAxis`)
 
@@ -343,7 +343,7 @@ The rotated vector
 const rotated = v.rotate(Math.PI / 2, 0, 1);
 ```
 
-#### sub
+#### Method: sub()
 
 > sub(`v`)
 

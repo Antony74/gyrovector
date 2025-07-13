@@ -19,6 +19,7 @@ type Node = {
     signatures?: Node[];
     parameters?: Node[];
     type?: { declaration?: Node };
+    flags: { isStatic: boolean };
 };
 
 const nodeLog = (kind: string, node: Node, depth: number): string => {
@@ -103,8 +104,16 @@ const documentMethod = (node: Node): string => {
     const returnsNode = getBlockTag(node, '@returns');
     const exampleNode = getBlockTag(node, '@example');
 
+    const title = ['Method:'];
+
+    if (node.flags.isStatic) {
+        title.push('static');
+    }
+
+    title.push(node.name);
+
     return [
-        `#### ${node.name}`,
+        `#### ${title.join(' ')}()`,
         ``,
         ...signatures.map((sig) => summarizeSignature(node.name, sig)),
         ``,
