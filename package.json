@@ -1,6 +1,7 @@
 {
     "name": "gyrovector",
     "version": "1.0.0",
+    "main": "dist/index.js",
     "scripts": {
         "doc": "tsx docs.ts",
         "docServe": "http-server docs",
