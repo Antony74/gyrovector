@@ -257,6 +257,10 @@ A new vector representing the sum
 
 ##### Example
 
+```ts
+const result = u.add(v);
+```
+
 #### array
 
 > array()
@@ -266,6 +270,10 @@ A new vector representing the sum
 ##### Returns
 
 ##### Example
+
+```ts
+const coords = v.array(); // e.g., [1, 2, 3]
+```
 
 #### div
 
@@ -283,6 +291,10 @@ A new vector representing the result of the division
 
 ##### Example
 
+```ts
+const result = u.div(2);
+```
+
 #### mult
 
 > mult(`c`)
@@ -298,6 +310,10 @@ The scalar multiplier
 A new vector representing the result of the multiplication
 
 ##### Example
+
+```ts
+const result = u.mult(2);
+```
 
 #### rotate
 
@@ -323,6 +339,10 @@ The rotated vector
 
 ##### Example
 
+```ts
+const rotated = v.rotate(Math.PI / 2, 0, 1);
+```
+
 #### sub
 
 > sub(`v`)
@@ -338,6 +358,10 @@ The vector to subtract
 A new vector representing the result of the substraction
 
 ##### Example
+
+```ts
+const result = u.sub(v);
+```
 
 ### Class Gyrovector
 

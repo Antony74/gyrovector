@@ -55,10 +55,7 @@ const getSummary = (node: Node): string => {
     return summary.join('\n');
 };
 
-const summarizeSignature = (
-    name: string,
-    node: Node,
-): string => {
+const summarizeSignature = (name: string, node: Node): string => {
     const params = (node.parameters ?? [])
         .map((param) => '`' + param.name + '`')
         .join(`, `);
@@ -78,24 +75,38 @@ const documentParameters = (node: Node): string => {
     );
 };
 
+const getBlockTag = (node: Node, tag: string): CommentNode => {
+    const signatures =
+        node.signatures ?? node.type?.declaration?.signatures ?? [];
+
+    let result = node.comment?.blockTags.filter(
+        (commentNode) => commentNode.tag === tag,
+    )[0]?.content[0];
+
+    if (!result) {
+        result = signatures[0].comment?.blockTags.filter(
+            (commentNode) => commentNode.tag === tag,
+        )[0]?.content[0];
+    }
+
+    if (!result) {
+        result = { kind: '', text: '' };
+    }
+
+    return result;
+};
+
 const documentMethod = (node: Node): string => {
     const signatures =
         node.signatures ?? node.type?.declaration?.signatures ?? [];
 
-    const returnsNode = signatures[0].comment?.blockTags.filter(
-        (commentNode) => commentNode.tag === '@returns',
-    )[0]?.content[0] ?? { kind: '', text: '' };
-
-    const exampleNode = node.comment?.blockTags.filter(
-        (commentNode) => commentNode.tag === '@example',
-    )[0]?.content[0] ?? { kind: '', text: '' };
+    const returnsNode = getBlockTag(node, '@returns');
+    const exampleNode = getBlockTag(node, '@example');
 
     return [
         `#### ${node.name}`,
         ``,
-        ...signatures.map((sig) =>
-            summarizeSignature(node.name, sig),
-        ),
+        ...signatures.map((sig) => summarizeSignature(node.name, sig)),
         ``,
         getSummary(node),
         ``,
