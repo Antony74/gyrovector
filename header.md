@@ -19,7 +19,7 @@ This package requires no familiarity with [P5](https://p5js.org/) and can be use
 
 After you've called the not-exactly-catchily titled `GyrovectorSpaceFactory.create()`, I promise every function name you subsequently encounter will be familiar. However, only a subset `p5.Vector` functions are supported at present.
 
-The vectors here are immutable, so their behavior not identical - but if you've every had trouble tracking down a bug because you forgot to call `copy()`, you'll probably be grateful for that.
+The vectors here are immutable, so their behavior is not identical - but if you've every had trouble tracking down a bug because you forgot to call `copy()`, you'll probably be grateful for that.
 
 ## Getting started
 
