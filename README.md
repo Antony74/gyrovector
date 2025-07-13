@@ -2,6 +2,15 @@
 
 Generalized immutable vector classes for hyperbolic, Euclidean, and spherical geometries. Supports any number of spatial dimensions and any curvature of space.
 
+## Contents
+
+- [This package welcomes P5 creative coders](#this-package-welcomes-p5-creative-coders)
+- [Getting started](#getting-started)
+- [Examples](#examples)
+- [Documentation](#documentation)
+- [Performance](#performance)
+- [Gyrovector resources](#gyrovector-resources)
+
 ## This package welcomes P5 creative coders
 
 Non-Euclidean geometry is weird, let't try to have some fun with it!
