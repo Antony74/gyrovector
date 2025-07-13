@@ -36,6 +36,6 @@ Alternatively, if you want your units in pixels, then I suggest starting with a 
 
 Because gyrovectors behave in ways which might be unfamiliar, it is suggested that to begin with you only call `createVector` once and make all your other vectors by rotating, scaling, and adding to this vector. This way of working is very reminiscent of turtle graphics in Logo, but with as many 'turtles' (i.e. vectors) as you like, or can fit into memory.
 
-## Examples
+## [Examples](https://github.com/Antony74/gyrovector/blob/main/examples.md)
 
 ## Documentation
