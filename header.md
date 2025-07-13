@@ -32,7 +32,7 @@ Subsequent calls to functions such as `add()`, `mult()`, `rotate()` will allow u
 
 Conventionally only curvatures of -1 (Hyperbolic), 0 (Euclidean), and 1 (Spherical) are considered. This simplifies some of the calculations, and there's no loss of generality because you can scale your vectors to fit the curvature (note that the unit vector in -1 hyperbolic geometry behaves particularly oddly. When modeling relativistic velocities, I think it represents the speed of light)
 
-Alternatively, if you want your units in pixels, then I suggest starting with a curvature of `1 / (width * height)` for spherical geometry, and tuning it to suit your particular use case. Similarly for hyperbolic geometry, I would start with a curvature of `-1 / (width * height)`. A useful hack given the lack of projections. More than two dimensions is also difficult to display for the same reason.
+Alternatively, if you want your units in pixels, then I suggest starting with a curvature of `1 / (width * height)` for spherical geometry, and tuning it to suit your particular use case. Similarly for hyperbolic geometry, I would start with a curvature of `-1 / (width * height)`. A useful hack or projection given the lack of other projections. More than two dimensions is also difficult to display for the same reason.
 
 Because gyrovectors behave in ways which might be unfamiliar, it is suggested that to begin with you only call `createVector` once and make all your other vectors by rotating, scaling, and adding to this vector. This way of working is very reminiscent of turtle graphics in Logo, but with as many 'turtles' (i.e. vectors) as you like, or can fit into memory.
 

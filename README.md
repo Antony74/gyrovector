@@ -32,11 +32,11 @@ Subsequent calls to functions such as `add()`, `mult()`, `rotate()` will allow u
 
 Conventionally only curvatures of -1 (Hyperbolic), 0 (Euclidean), and 1 (Spherical) are considered. This simplifies some of the calculations, and there's no loss of generality because you can scale your vectors to fit the curvature (note that the unit vector in -1 hyperbolic geometry behaves particularly oddly. When modeling relativistic velocities, I think it represents the speed of light)
 
-Alternatively, if you want your units in pixels, then I suggest starting with a curvature of `1 / (width * height)` for spherical geometry, and tuning it to suit your particular use case. Similarly for hyperbolic geometry, I would start with a curvature of `-1 / (width * height)`. A useful hack given the lack of projections. More than two dimensions is also difficult to display for the same reason.
+Alternatively, if you want your units in pixels, then I suggest starting with a curvature of `1 / (width * height)` for spherical geometry, and tuning it to suit your particular use case. Similarly for hyperbolic geometry, I would start with a curvature of `-1 / (width * height)`. A useful hack or projection given the lack of other projections. More than two dimensions is also difficult to display for the same reason.
 
 Because gyrovectors behave in ways which might be unfamiliar, it is suggested that to begin with you only call `createVector` once and make all your other vectors by rotating, scaling, and adding to this vector. This way of working is very reminiscent of turtle graphics in Logo, but with as many 'turtles' (i.e. vectors) as you like, or can fit into memory.
 
-## Examples
+## [Examples](https://github.com/Antony74/gyrovector/blob/main/examples.md)
 
 ## Documentation
 
@@ -381,6 +381,20 @@ Two dimensional Euclidean vector represented by the fields {x, y}
 
 ## Performance
 
+- The best gyrovector performance would be achieved by using the GPU instead of the CPU. This is beyond the scope of a package which runs purely on the JavaScript platform. Maybe try looking at the shaders in [HyperEngine](https://github.com/HackerPoet/HyperEngine)?
+
+- If you have more than one (affine) transform which you wish to perform on more than one vector, then matrix arithmetic is a more efficient way to go about this. I haven't figured out how to perform [the equivalent operations in gyrovector space yet](https://www.youtube.com/watch?v=pXWRYpdYc7Q&list=PLh9DXIT3m6N4qJK9GKQB3yk61tVe6qJvA&index=4&t=192s).
+
+- To properly explore performance, it would be nessasary to write some benchmarks for this package, so that the effectiveness of any performance improvements could easily be measured (and any future performance regressions monitored for).
+
+- The design decision to make these gyrovectors immutable has a performance cost. The justification for this is that I wish the package to be as easy use as possible. However, these have also used these internally.
+
+With those caveats out of the way, the big thing this package does for performance is to provide multiple implementations for gyrovectors, so if you're using Euclidean space and/or two dimensional space, a faster implementation is available. This is abstracted from the user by the [GyrovectorSpaceFactory.create](#method-static-create) method, which picks the best available class to represent the gyrovector space which you have requested.
+
+This approach could be taken further. An implementation specific to three dimensions might be particularly helpful, and could add additional helper methods rotateX, rotateY, and rotateZ. Also the curvatures -1 and +1 might benefit from their own implementations, as the math simplifies slightly in these cases, but not to the same extent it simplifies in Euclidean space, where many terms which are due to be multiplied by zero can simply be ignored.
+
+Another small thing which has been done for performance is to favor inheritance over composition. Usually you'd be advised to do exactly the opposite for maintainability, but composition has a slight overhead, which perhaps should be avoided for something as low level as a vector.
+
 ## Gyrovector resources
 
 - [A Universal Model for Hyperbolic, Euclidean and Spherical Geometries](https://andbloch.github.io/K-Stereographic-Model/)
@@ -388,4 +402,4 @@ Two dimensional Euclidean vector represented by the fields {x, y}
 - [Hyperbolica (YouTube)](https://www.youtube.com/playlist?list=PLh9DXIT3m6N4qJK9GKQB3yk61tVe6qJvA) - Devlog for the non-Euclidean game Hyperbolica.
 - [HyperEngine (GitHub)](https://github.com/HackerPoet/HyperEngine) - The Non-Euclidean Unity Backend for Hyperbolica.
 
-Another way to make a gyrovector space look flat is to zoom in far enough. That means we can never know our universe is Euclidean; it might be that we simply have not zoomed out far enough.
+_Another way to make a gyrovector space look flat is to zoom in far enough. That means we can never know our universe is Euclidean; it might be that we simply have not zoomed out far enough._
