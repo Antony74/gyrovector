@@ -5,7 +5,12 @@ import { rimraf } from 'rimraf';
 import * as typedoc from 'typedoc';
 import prettier from 'prettier';
 
-type Comment = { summary: [{ text: string }] };
+type CommentNode = { kind: string; text: string };
+
+type Comment = {
+    summary: CommentNode[];
+    blockTags: { tag: string; content: CommentNode[] }[];
+};
 
 type Node = {
     name: string;
@@ -50,9 +55,12 @@ const getSummary = (node: Node): string => {
     return summary.join('\n');
 };
 
-const summarizeSignature = (name: string, node: Node): string => {
+const summarizeSignature = (
+    name: string,
+    node: Node,
+): string => {
     const params = (node.parameters ?? [])
-        .map((param) => param.name)
+        .map((param) => '`' + param.name + '`')
         .join(`, `);
 
     return `> ${name}(${params})`;
@@ -74,14 +82,32 @@ const documentMethod = (node: Node): string => {
     const signatures =
         node.signatures ?? node.type?.declaration?.signatures ?? [];
 
+    const returnsNode = signatures[0].comment?.blockTags.filter(
+        (commentNode) => commentNode.tag === '@returns',
+    )[0]?.content[0] ?? { kind: '', text: '' };
+
+    const exampleNode = node.comment?.blockTags.filter(
+        (commentNode) => commentNode.tag === '@example',
+    )[0]?.content[0] ?? { kind: '', text: '' };
+
     return [
         `#### ${node.name}`,
         ``,
-        ...signatures.map((sig) => summarizeSignature(node.name, sig)),
+        ...signatures.map((sig) =>
+            summarizeSignature(node.name, sig),
+        ),
         ``,
         getSummary(node),
         ``,
         ...signatures.map(documentParameters),
+        ``,
+        `##### Returns`,
+        ``,
+        returnsNode.text,
+        ``,
+        `##### Example`,
+        ``,
+        exampleNode.text,
     ]
         .join('\n')
         .trim();

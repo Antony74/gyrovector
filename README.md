@@ -47,7 +47,7 @@ based on dimension and curvature.
 
 #### create
 
-> create(dimension, curvature)
+> create(`dimension`, `curvature`)
 
 Creates a gyrovector space
 
@@ -62,13 +62,23 @@ The number of spatial dimensions
 Curvature of space. Negative for hyperbolic space, zero for Euclidean space,
 positive for spherical space.
 
+##### Returns
+
+A specific instance of vector space or a gyrovector space
+
+##### Example
+
+```ts
+const space = GyrovectorSpaceFactory.create(2, 0.5);
+```
+
 ### Class VectorSpaceLike
 
 A generic type representing vector space or gyrovector space.
 
 #### add
 
-> add(u, v)
+> add(`u`, `v`)
 
 Adds two vectors.
 
@@ -82,9 +92,20 @@ The first vector
 
 The second vector
 
+##### Returns
+
+A vector representing the sum of the addition. The order of the parameters matters
+(except in Euclidean space) because gyrovector/mobius addition is not associative.
+
+##### Example
+
+```ts
+const result = space.add(u, v);
+```
+
 #### createVector
 
-> createVector(tuplePrimitive)
+> createVector(`tuplePrimitive`)
 
 Constructs a new vector.
 
@@ -94,9 +115,19 @@ Constructs a new vector.
 
 An array of the correct length for the number of dimensions in this vector space
 
+##### Returns
+
+A new vector instance
+
+##### Example
+
+```ts
+const v = space.createVector(1, 2, 3);
+```
+
 #### div
 
-> div(c, u)
+> div(`c`, `u`)
 
 Divides a vector by a scalar.
 
@@ -110,9 +141,19 @@ The scalar divisor
 
 The vector to divide
 
+##### Returns
+
+The resulting vector from u / c
+
+##### Example
+
+```ts
+const result = space.div(2, u);
+```
+
 #### mult
 
-> mult(c, u)
+> mult(`c`, `u`)
 
 Multiplies a vector by a scalar.
 
@@ -126,9 +167,19 @@ The scalar multiplier
 
 The vector to scale
 
+##### Returns
+
+A new scaled vector
+
+##### Example
+
+```ts
+const result = space.mult(2, u);
+```
+
 #### rotate
 
-> rotate(u, radians, firstAxis, secondAxis)
+> rotate(`u`, `radians`, `firstAxis`, `secondAxis`)
 
 Rotates a vector in a specified plane by a given angle (in radians).
 
@@ -150,9 +201,19 @@ The first axis in the plane of rotation (optional)
 
 The second axis in the plane of rotation (optional)
 
+##### Returns
+
+A new rotated vector
+
+##### Example
+
+```ts
+const result = space.rotate(u, Math.PI / 2, 0, 1);
+```
+
 #### sub
 
-> sub(u, v)
+> sub(`u`, `v`)
 
 Subtracts one vector from another.
 
@@ -166,13 +227,23 @@ The vector to subtract from
 
 The vector to subtract
 
+##### Returns
+
+A vector representing the result of the subtraction.
+
+##### Example
+
+```ts
+const result = space.sub(u, v);
+```
+
 ### Class VectorLike
 
 A generic type representing vector or gyrovector.
 
 #### add
 
-> add(v)
+> add(`v`)
 
 ##### Parameters
 
@@ -180,15 +251,25 @@ A generic type representing vector or gyrovector.
 
 The vector to add
 
+##### Returns
+
+A new vector representing the sum
+
+##### Example
+
 #### array
 
 > array()
 
 ##### Parameters
 
+##### Returns
+
+##### Example
+
 #### div
 
-> div(c)
+> div(`c`)
 
 ##### Parameters
 
@@ -196,9 +277,15 @@ The vector to add
 
 The scalar divisor
 
+##### Returns
+
+A new vector representing the result of the division
+
+##### Example
+
 #### mult
 
-> mult(c)
+> mult(`c`)
 
 ##### Parameters
 
@@ -206,9 +293,15 @@ The scalar divisor
 
 The scalar multiplier
 
+##### Returns
+
+A new vector representing the result of the multiplication
+
+##### Example
+
 #### rotate
 
-> rotate(radians, firstAxis, secondAxis)
+> rotate(`radians`, `firstAxis`, `secondAxis`)
 
 ##### Parameters
 
@@ -224,15 +317,27 @@ The first axis in the plane of rotation (optional)
 
 The second axis in the plane of rotation (optional)
 
+##### Returns
+
+The rotated vector
+
+##### Example
+
 #### sub
 
-> sub(v)
+> sub(`v`)
 
 ##### Parameters
 
 ###### v
 
 The vector to subtract
+
+##### Returns
+
+A new vector representing the result of the substraction
+
+##### Example
 
 ### Class Gyrovector
 
