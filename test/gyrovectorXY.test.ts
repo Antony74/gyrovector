@@ -1,9 +1,9 @@
 import { GyrovectorXYSpace } from '../src/gyrovectorXY';
-import { curvatureMinusOneAddition } from './curvatureMinusOne';
+import { curvatureMinusOne } from './curvatureMinusOne';
 
 describe(`GyrovectorXY`, () => {
     describe(`curvature -1`, () => {
         const space = new GyrovectorXYSpace(-1);
-        curvatureMinusOneAddition(space);
+        curvatureMinusOne(space);
     });
 });
