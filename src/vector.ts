@@ -26,7 +26,7 @@ export class Vector<Dimension extends number>
     add(v: Vector<Dimension>): Vector<Dimension> {
         return new Vector<Dimension>(
             ...this._tuple.map((value, index) => {
-                return value + v.tuple.at(index);
+                return value + v.tuple.at(index)!;
             }).tuple,
         );
     }
@@ -34,7 +34,7 @@ export class Vector<Dimension extends number>
     sub(v: Vector<Dimension>): Vector<Dimension> {
         return new Vector<Dimension>(
             ...this._tuple.map((value, index) => {
-                return value - v._tuple.at(index);
+                return value - v._tuple.at(index)!;
             }).tuple,
         );
     }
@@ -64,6 +64,12 @@ export class Vector<Dimension extends number>
         const x = this._tuple.at(firstAxis);
         const y = this._tuple.at(secondAxis);
 
+        if (x === undefined || y === undefined) {
+            throw new Error(
+                `Vector.rotate(${radians}, ${firstAxis}, ${secondAxis}) called with invalid axes`,
+            );
+        }
+
         return new Vector<Dimension>(
             ...this._tuple.map((value, index) => {
                 if (index === firstAxis) {
@@ -79,7 +85,7 @@ export class Vector<Dimension extends number>
 
     dot(v: Vector<Dimension>): number {
         return this._tuple.reduce((acc, value, index) => {
-            return acc + (value * v._tuple.at(index));
+            return acc + (value * v._tuple.at(index)!);
         }, 0);
     }
 

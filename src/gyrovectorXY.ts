@@ -51,8 +51,16 @@ export class GyrovectorXY implements VectorLike<2, GyrovectorXY> {
         return this.mult(1 / c);
     }
 
-    rotate(radians: number): GyrovectorXY {
-        const result = new VectorXY(this.x, this.y).rotate(radians);
+    rotate(
+        radians: number,
+        firstAxis: number = 0,
+        secondAxis: number = 1,
+    ): GyrovectorXY {
+        const result = new VectorXY(this.x, this.y).rotate(
+            radians,
+            firstAxis,
+            secondAxis,
+        );
         return new GyrovectorXY(this.curvature, result.x, result.y);
     }
 }

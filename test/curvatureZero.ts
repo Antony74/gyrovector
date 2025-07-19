@@ -26,7 +26,7 @@ export const curvatureZero = <
     });
 
     it(`multiplies`, () => {
-        const u = space.createVector(-0.20000, 0.50000);
+        const u = space.createVector(-0.2, 0.5);
 
         const result = u.mult(2.5).array();
 
@@ -34,7 +34,7 @@ export const curvatureZero = <
     });
 
     it(`divides`, () => {
-        const u = space.createVector(-0.20000, 0.50000);
+        const u = space.createVector(-0.2, 0.5);
 
         const result = u.div(0.4).array();
 

@@ -61,9 +61,15 @@ export class Gyrovector<Dimension extends number>
         return this.mult(1 / c);
     }
 
-    rotate(radians: number): Gyrovector<Dimension> {
+    rotate(
+        radians: number,
+        firstAxis: number = 0,
+        secondAxis: number = 1,
+    ): Gyrovector<Dimension> {
         const result = new Vector<Dimension>(...this._tuple.tuple).rotate(
             radians,
+            firstAxis,
+            secondAxis,
         );
         return new Gyrovector(this.curvature, ...result.tuple.tuple);
     }
