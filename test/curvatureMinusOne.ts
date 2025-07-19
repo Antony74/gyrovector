@@ -17,15 +17,14 @@ export const curvatureMinusOne = <
         expect(dp5(result)).toEqual(['-0.58307', '0.44454']);
     });
 
-    // it(`substracts`, () => {
-    //     const u = space.createVector(0.2, 0.5);
-    //     const v = space.createVector(-0.6, 0.1);
+    it(`substracts`, () => {
+        const u = space.createVector(0.2, 0.5);
+        const v = space.createVector(-0.6, 0.1);
 
-    //     const result = u.add(v).sub(v).array();
+        const result = u.add(v).sub(v).array();
 
-    //     expect(dp5(result)).toEqual(['0.2', '0.5']);
-
-    // })
+        expect(dp5(result)).toEqual(['0.20000', '0.50000']);
+    });
 
     it(`multiplies`, () => {
         const u = space.createVector(-0.2, 0.5);
