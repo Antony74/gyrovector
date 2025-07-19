@@ -1,5 +1,6 @@
 import { GyrovectorSpace } from '../src/gyrovector';
 import { curvatureMinusOne } from './curvatureMinusOne';
+import { curvaturePlusHalf } from './curvaturePlusHalf';
 import { curvatureZero } from './curvatureZero';
 
 describe(`Gyrovector`, () => {
@@ -11,5 +12,10 @@ describe(`Gyrovector`, () => {
     describe(`curvature 0`, () => {
         const space = new GyrovectorSpace<2>(0);
         curvatureZero(space);
+    });
+
+    describe(`curvature +0.5`, () => {
+        const space = new GyrovectorSpace<2>(0.5);
+        curvaturePlusHalf(space);
     });
 });
