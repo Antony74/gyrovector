@@ -6,7 +6,9 @@
         "doc": "tsx docs.ts",
         "docServe": "http-server docs",
         "lint": "prettier --write . && eslint src --fix",
-        "start": "rimraf dist && tsc"
+        "start": "rimraf dist && tsc",
+        "test": "jest",
+        "test:coverage": "jest --coverage"
     },
     "repository": {
         "type": "git",
@@ -28,17 +30,20 @@
     "homepage": "https://github.com/Antony74/gyrovector#readme",
     "description": "Gyrovector classes for hyperbolic, Euclidean, and spherical geometries",
     "devDependencies": {
-        "@eslint/js": "^9.27.0",
+        "@eslint/js": "^9.31.0",
+        "@types/jest": "^30.0.0",
         "@types/node": "^24.0.10",
-        "eslint": "^9.27.0",
+        "eslint": "^9.31.0",
         "eslint-plugin-no-mixed-operators": "^1.1.1",
         "http-server": "^14.1.1",
+        "jest": "^30.0.4",
         "prettier": "^3.5.3",
         "rimraf": "^6.0.1",
+        "ts-jest": "^29.4.0",
         "tsx": "^4.20.3",
         "typedoc": "^0.28.6",
         "typescript": "^5.8.3",
-        "typescript-eslint": "^8.32.1"
+        "typescript-eslint": "^8.37.0"
     },
     "prettier": {
         "tabWidth": 4,
