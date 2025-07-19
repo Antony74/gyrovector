@@ -1,4 +1,4 @@
-import { GyrovectorSpace } from '../src/gyrovector';
+import { GyrovectorSpace } from '../src';
 import { curvatureMinusOne } from './curvatureMinusOne';
 import { curvaturePlusHalf } from './curvaturePlusHalf';
 import { curvatureZero } from './curvatureZero';
