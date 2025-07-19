@@ -34,4 +34,21 @@ export const curvatureMinusOne = <
         // Answer supplied from https://github.com/joshgreaves/Gyrovectors
         expect(dp5(result)).toEqual(['-0.33651', '0.84127']);
     });
+
+    it(`multiplies by zero`, () => {
+        const u = space.createVector(-0.2, 0.5);
+
+        const result = u.mult(0).array();
+
+        expect(dp5(result)).toEqual(['0.00000', '0.00000']);
+    });
+
+    it(`divides`, () => {
+        const u = space.createVector(-0.2, 0.5);
+
+        const result = u.div(0.4).array();
+
+        // Answer supplied from https://github.com/joshgreaves/Gyrovectors
+        expect(dp5(result)).toEqual(['-0.33651', '0.84127']);
+    });
 };

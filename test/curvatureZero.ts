@@ -32,4 +32,12 @@ export const curvatureZero = <
 
         expect(dp5(result)).toEqual(['-0.50000', '1.25000']);
     });
+
+    it(`divides`, () => {
+        const u = space.createVector(-0.20000, 0.50000);
+
+        const result = u.div(0.4).array();
+
+        expect(dp5(result)).toEqual(['-0.50000', '1.25000']);
+    });
 };
