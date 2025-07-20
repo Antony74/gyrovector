@@ -64,7 +64,7 @@ export class Vector<Dimension extends number>
         const x = this._tuple.at(firstAxis);
         const y = this._tuple.at(secondAxis);
 
-        if (x === undefined || y === undefined) {
+        if (x === undefined || y === undefined || firstAxis === secondAxis) {
             throw new Error(
                 `Vector.rotate(${radians}, ${firstAxis}, ${secondAxis}) called with invalid axes`,
             );
