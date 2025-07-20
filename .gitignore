@@ -2,3 +2,4 @@ node_modules
 docs/*
 !docs/header.md
 !docs/footer.md
+coverage

@@ -30,11 +30,26 @@ export class VectorXY implements VectorLike<2, VectorXY> {
         return new VectorXY(this.x / c, this.y / c);
     }
 
-    rotate(radians: number): VectorXY {
-        return new VectorXY(
-            (this.x * Math.cos(radians)) - (this.y * Math.sin(radians)),
-            (this.x * Math.sin(radians)) + (this.y * Math.cos(radians)),
-        );
+    rotate(
+        radians: number,
+        firstAxis: number = 0,
+        secondAxis: number = 1,
+    ): VectorXY {
+        if (firstAxis === 0 && secondAxis === 1) {
+            return new VectorXY(
+                (this.x * Math.cos(radians)) - (this.y * Math.sin(radians)),
+                (this.x * Math.sin(radians)) + (this.y * Math.cos(radians)),
+            );
+        } else if (firstAxis === 1 && secondAxis === 0) {
+            return new VectorXY(
+                (this.y * Math.sin(radians)) + (this.x * Math.cos(radians)),
+                (this.y * Math.cos(radians)) - (this.x * Math.sin(radians)),
+            );
+        } else {
+            throw new Error(
+                `VectorXY.rotate(${radians}, ${firstAxis}, ${secondAxis}) called with invalid axes`,
+            );
+        }
     }
 
     array(): Readonly<[number, number]> {

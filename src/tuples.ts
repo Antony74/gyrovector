@@ -17,7 +17,7 @@ export class Tuple<T, Dimension extends number> {
         return (this.tuple as Array<T>).length as Dimension;
     }
 
-    at(index: number): T {
+    at(index: number): T | undefined {
         return (this.tuple as Array<T>)[index];
     }
 
@@ -29,7 +29,7 @@ export class Tuple<T, Dimension extends number> {
     }
 
     static from<T, Dimension extends number>(
-        n: number,
+        n: Dimension,
         maybeTuple: { length: number },
     ): Tuple<T, Dimension> {
         const arr = Array.from<T>(maybeTuple);

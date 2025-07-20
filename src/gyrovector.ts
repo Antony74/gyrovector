@@ -44,16 +44,7 @@ export class Gyrovector<Dimension extends number>
     }
 
     sub(v: Gyrovector<Dimension>): Gyrovector<Dimension> {
-        const _u = new Vector<Dimension>(...this._tuple.tuple);
-        const _v = new Vector<Dimension>(...v._tuple.tuple).mult(-1);
-
-        const result = mobiusAdd<Dimension, Vector<Dimension>>(
-            _u,
-            _v,
-            this.curvature,
-        );
-
-        return new Gyrovector(this.curvature, ...result.tuple.tuple);
+        return this.add(v.mult(-1));
     }
 
     mult(c: number): Gyrovector<Dimension> {
@@ -70,9 +61,15 @@ export class Gyrovector<Dimension extends number>
         return this.mult(1 / c);
     }
 
-    rotate(radians: number): Gyrovector<Dimension> {
+    rotate(
+        radians: number,
+        firstAxis: number = 0,
+        secondAxis: number = 1,
+    ): Gyrovector<Dimension> {
         const result = new Vector<Dimension>(...this._tuple.tuple).rotate(
             radians,
+            firstAxis,
+            secondAxis,
         );
         return new Gyrovector(this.curvature, ...result.tuple.tuple);
     }
