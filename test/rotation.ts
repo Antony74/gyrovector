@@ -13,6 +13,14 @@ export const rotation = <GyrovectorType extends VectorLike<2, GyrovectorType>>(
         expect(dp5(result)).toEqual(['-0.33301', '0.42321']);
     });
 
+    it(`rotates with axes switched`, () => {
+        const u = space.createVector(0.2, 0.5);
+
+        const result = u.rotate(-Math.PI / 3, 1, 0).array();
+
+        expect(dp5(result)).toEqual(['-0.33301', '0.42321']);
+    });
+
     it(`throw on rotations with invalid axes`, () => {
         const u = space.createVector(0.2, 0.5);
 

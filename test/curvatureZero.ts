@@ -16,6 +16,15 @@ export const curvatureZero = <
         expect(dp5(result)).toEqual(['-0.40000', '0.60000']);
     });
 
+    it(`adds via the space`, () => {
+        const u = space.createVector(0.2, 0.5);
+        const v = space.createVector(-0.6, 0.1);
+
+        const result = space.add(u, v).array();
+
+        expect(dp5(result)).toEqual(['-0.40000', '0.60000']);
+    });
+
     it(`substracts`, () => {
         const u = space.createVector(0.2, 0.5);
         const v = space.createVector(-0.6, 0.1);

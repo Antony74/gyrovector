@@ -42,8 +42,8 @@ export class VectorXY implements VectorLike<2, VectorXY> {
             );
         } else if (firstAxis === 1 && secondAxis === 0) {
             return new VectorXY(
-                (this.y * Math.cos(radians)) - (this.x * Math.sin(radians)),
                 (this.y * Math.sin(radians)) + (this.x * Math.cos(radians)),
+                (this.y * Math.cos(radians)) - (this.x * Math.sin(radians)),
             );
         } else {
             throw new Error(
