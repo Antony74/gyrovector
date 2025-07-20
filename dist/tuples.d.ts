@@ -5,11 +5,11 @@ export declare class Tuple<T, Dimension extends number> {
     tuple: TuplePrimitive<T, Dimension>;
     constructor(tuple: TuplePrimitive<T, Dimension>);
     get length(): Dimension;
-    at(index: number): T;
+    at(index: number): T | undefined;
     static isTuplePrimitive<T, Dimension extends number>(n: number, maybeTuple: {
         length: number;
     }): maybeTuple is TuplePrimitive<T, Dimension>;
-    static from<T, Dimension extends number>(n: number, maybeTuple: {
+    static from<T, Dimension extends number>(n: Dimension, maybeTuple: {
         length: number;
     }): Tuple<T, Dimension>;
     map<U>(callbackfn: (value: T, index: number, array: T[]) => U, thisArg?: Readonly<ArrayLike<T>>): Tuple<U, Dimension>;

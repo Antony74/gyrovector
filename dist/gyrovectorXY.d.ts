@@ -15,7 +15,7 @@ export declare class GyrovectorXY implements VectorLike<2, GyrovectorXY> {
     sub(v: GyrovectorXY): GyrovectorXY;
     mult(c: number): GyrovectorXY;
     div(c: number): GyrovectorXY;
-    rotate(radians: number): GyrovectorXY;
+    rotate(radians: number, firstAxis?: number, secondAxis?: number): GyrovectorXY;
 }
 /**
  * 2-dimensional gyrovector space for gyrovectors represented by the fields {x, y}

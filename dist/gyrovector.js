@@ -24,10 +24,7 @@ class Gyrovector {
         return new Gyrovector(this.curvature, ...result.tuple.tuple);
     }
     sub(v) {
-        const _u = new vector_1.Vector(...this._tuple.tuple);
-        const _v = new vector_1.Vector(...v._tuple.tuple).mult(-1);
-        const result = (0, mobius_1.mobiusAdd)(_u, _v, this.curvature);
-        return new Gyrovector(this.curvature, ...result.tuple.tuple);
+        return this.add(v.mult(-1));
     }
     mult(c) {
         const u = new vector_1.Vector(...this._tuple.tuple);
@@ -37,8 +34,8 @@ class Gyrovector {
     div(c) {
         return this.mult(1 / c);
     }
-    rotate(radians) {
-        const result = new vector_1.Vector(...this._tuple.tuple).rotate(radians);
+    rotate(radians, firstAxis = 0, secondAxis = 1) {
+        const result = new vector_1.Vector(...this._tuple.tuple).rotate(radians, firstAxis, secondAxis);
         return new Gyrovector(this.curvature, ...result.tuple.tuple);
     }
 }

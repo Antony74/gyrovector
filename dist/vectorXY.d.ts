@@ -12,7 +12,7 @@ export declare class VectorXY implements VectorLike<2, VectorXY> {
     sub(v: VectorXY): VectorXY;
     mult(c: number): VectorXY;
     div(c: number): VectorXY;
-    rotate(radians: number): VectorXY;
+    rotate(radians: number, firstAxis?: number, secondAxis?: number): VectorXY;
     array(): Readonly<[number, number]>;
     dot(v: VectorXY): number;
     magSq(): number;

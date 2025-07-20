@@ -34,8 +34,8 @@ class GyrovectorXY {
     div(c) {
         return this.mult(1 / c);
     }
-    rotate(radians) {
-        const result = new vectorXY_1.VectorXY(this.x, this.y).rotate(radians);
+    rotate(radians, firstAxis = 0, secondAxis = 1) {
+        const result = new vectorXY_1.VectorXY(this.x, this.y).rotate(radians, firstAxis, secondAxis);
         return new GyrovectorXY(this.curvature, result.x, result.y);
     }
 }

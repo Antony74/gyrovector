@@ -18,8 +18,8 @@ class VectorSpaceBase {
     div(c, u) {
         return u.div(c);
     }
-    rotate(u, radians) {
-        return u.rotate(radians);
+    rotate(u, radians, firstAxis, secondAxis) {
+        return u.rotate(radians, firstAxis, secondAxis);
     }
 }
 exports.VectorSpaceBase = VectorSpaceBase;

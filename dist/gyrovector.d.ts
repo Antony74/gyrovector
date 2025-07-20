@@ -15,7 +15,7 @@ export declare class Gyrovector<Dimension extends number> implements VectorLike<
     sub(v: Gyrovector<Dimension>): Gyrovector<Dimension>;
     mult(c: number): Gyrovector<Dimension>;
     div(c: number): Gyrovector<Dimension>;
-    rotate(radians: number): Gyrovector<Dimension>;
+    rotate(radians: number, firstAxis?: number, secondAxis?: number): Gyrovector<Dimension>;
 }
 /**
  * n-dimensional gyrovector space for gyrovectors represented by an array of the correct length

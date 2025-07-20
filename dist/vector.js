@@ -40,6 +40,9 @@ class Vector {
     rotate(radians, firstAxis = 0, secondAxis = 1) {
         const x = this._tuple.at(firstAxis);
         const y = this._tuple.at(secondAxis);
+        if (x === undefined || y === undefined || firstAxis === secondAxis) {
+            throw new Error(`Vector.rotate(${radians}, ${firstAxis}, ${secondAxis}) called with invalid axes`);
+        }
         return new Vector(...this._tuple.map((value, index) => {
             if (index === firstAxis) {
                 return (x * Math.cos(radians)) - (y * Math.sin(radians));
