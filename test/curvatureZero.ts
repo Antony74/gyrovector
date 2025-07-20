@@ -34,6 +34,15 @@ export const curvatureZero = <
         expect(dp5(result)).toEqual(['0.20000', '0.50000']);
     });
 
+    it(`substracts via the space`, () => {
+        const u = space.createVector(0.2, 0.5);
+        const v = space.createVector(-0.6, 0.1);
+
+        const result = space.sub(u.add(v), v).array();
+
+        expect(dp5(result)).toEqual(['0.20000', '0.50000']);
+    });
+
     it(`multiplies`, () => {
         const u = space.createVector(-0.2, 0.5);
 
@@ -42,10 +51,26 @@ export const curvatureZero = <
         expect(dp5(result)).toEqual(['-0.50000', '1.25000']);
     });
 
+    it(`multiplies via the space`, () => {
+        const u = space.createVector(-0.2, 0.5);
+
+        const result = space.mult(2.5, u).array();
+
+        expect(dp5(result)).toEqual(['-0.50000', '1.25000']);
+    });
+
     it(`divides`, () => {
         const u = space.createVector(-0.2, 0.5);
 
         const result = u.div(0.4).array();
+
+        expect(dp5(result)).toEqual(['-0.50000', '1.25000']);
+    });
+
+    it(`divides via the space`, () => {
+        const u = space.createVector(-0.2, 0.5);
+
+        const result = space.div(0.4, u).array();
 
         expect(dp5(result)).toEqual(['-0.50000', '1.25000']);
     });

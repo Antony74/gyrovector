@@ -27,7 +27,12 @@ export class VectorSpaceBase<
         return u.div(c);
     }
 
-    rotate(u: Vector, radians: number): Vector {
-        return u.rotate(radians);
+    rotate(
+        u: Vector,
+        radians: number,
+        firstAxis?: number,
+        secondAxis?: number,
+    ): Vector {
+        return u.rotate(radians, firstAxis, secondAxis);
     }
 }
