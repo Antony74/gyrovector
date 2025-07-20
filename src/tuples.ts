@@ -29,7 +29,7 @@ export class Tuple<T, Dimension extends number> {
     }
 
     static from<T, Dimension extends number>(
-        n: number,
+        n: Dimension,
         maybeTuple: { length: number },
     ): Tuple<T, Dimension> {
         const arr = Array.from<T>(maybeTuple);
