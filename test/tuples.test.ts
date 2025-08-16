@@ -12,17 +12,9 @@ describe(`Tuple`, () => {
     });
 
     it(`can't be created from an array of the incorrect length`, () => {
-        let msg;
+        const fn = () => Tuple.from<number, 4>(4, [1, 2, 3]);
 
-        try {
-            Tuple.from<number, 4>(4, [1, 2, 3]);
-        } catch (e) {
-            if (e instanceof Error) {
-                msg = e.message;
-            }
-        }
-
-        expect(msg).toEqual(
+        expect(fn).toThrow(
             'Tuple.from: Array of length 4 required to create a 4-tuple',
         );
     });

@@ -77,24 +77,26 @@ const documentParameters = (node: Node): string => {
 };
 
 const getBlockTag = (node: Node, tag: string): CommentNode => {
+    const filterComment = (commentNode) => commentNode.tag === tag;
+
     const signatures =
         node.signatures ?? node.type?.declaration?.signatures ?? [];
 
-    let result = node.comment?.blockTags.filter(
-        (commentNode) => commentNode.tag === tag,
-    )[0]?.content[0];
+    const fromNode =
+        node.comment?.blockTags.filter(filterComment)[0]?.content[0];
 
-    if (!result) {
-        result = signatures[0].comment?.blockTags.filter(
-            (commentNode) => commentNode.tag === tag,
-        )[0]?.content[0];
+    if (fromNode) {
+        return fromNode;
     }
 
-    if (!result) {
-        result = { kind: '', text: '' };
+    const fromSignatures =
+        signatures[0].comment?.blockTags.filter(filterComment)[0]?.content[0];
+
+    if (fromSignatures) {
+        return fromSignatures;
     }
 
-    return result;
+    return { kind: '', text: '' };
 };
 
 const documentMethod = (node: Node): string => {

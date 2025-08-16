@@ -24,34 +24,16 @@ export const rotation = <GyrovectorType extends VectorLike<2, GyrovectorType>>(
     it(`throw on rotations with invalid axes`, () => {
         const u = space.createVector(0.2, 0.5);
 
-        let msg;
+        const fn = () => u.rotate(Math.PI / 3, 0, 3);
 
-        try {
-            u.rotate(Math.PI / 3, 0, 3);
-        } catch (e) {
-            if (e instanceof Error) {
-                msg = e.message;
-            }
-        }
-
-        expect(msg).toContain('rotate');
-        expect(msg).toContain('called with invalid axes');
+        expect(fn).toThrow(/rotate[\s\S]*called with invalid axes/);
     });
 
     it(`throw on rotations with the same axis specified twice`, () => {
         const u = space.createVector(0.2, 0.5);
 
-        let msg;
+        const fn = () => u.rotate(Math.PI / 3, 0, 0);
 
-        try {
-            u.rotate(Math.PI / 3, 0, 0);
-        } catch (e) {
-            if (e instanceof Error) {
-                msg = e.message;
-            }
-        }
-
-        expect(msg).toContain('rotate');
-        expect(msg).toContain('called with invalid axes');
+        expect(fn).toThrow(/rotate[\s\S]*called with invalid axes/);
     });
 };

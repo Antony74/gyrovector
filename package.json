@@ -5,7 +5,7 @@
     "scripts": {
         "doc": "tsx docs.ts",
         "docServe": "http-server docs",
-        "lint": "prettier --write . && eslint src --fix",
+        "lint": "prettier --write . && eslint src test docs.ts --fix",
         "start": "rimraf dist && tsc",
         "test": "jest",
         "test:coverage": "jest --coverage --collectCoverageFrom=./src/*.ts"
