@@ -34,6 +34,7 @@
         "@types/jest": "^30.0.0",
         "@types/node": "^24.0.10",
         "eslint": "^9.31.0",
+        "eslint-plugin-functional": "^9.0.2",
         "eslint-plugin-no-mixed-operators": "^1.1.1",
         "http-server": "^14.1.1",
         "jest": "^30.0.4",
